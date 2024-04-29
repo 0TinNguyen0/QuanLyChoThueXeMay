@@ -1,0 +1,244 @@
+﻿body {
+
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+    a[b-s7mo5smr33] {
+        color: #000;
+    }
+
+#wrapper {
+    width: 1400px;
+    height: auto;
+    margin: auto;
+}
+
+.container {
+    margin: 0px auto;
+    max-width: 960px;
+}
+
+
+
+#logo {
+    color: #000;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    display: block;
+}
+
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px solid #000;
+/*    padding: 10px 0px;*/
+    transition: all 0.5s;
+    background: #e9ecef;
+}
+
+nav {
+    padding-top: 15px;
+}
+
+.navbar-nav {
+    flex-direction: row;
+}
+
+
+header.sticky {
+    background: #b9bcbf;
+    color: #00ffff;
+}
+
+        header.sticky #logo {
+            color: #000;
+        }
+
+        header.sticky #main-menu a {
+            color: #fff;
+        }
+
+        header.sticky #logo_header a {
+            color: #000;
+        }
+
+        header.sticky #main-menu .icon-youtube {
+            color: #00ffff;
+        }
+
+        header.sticky #main-menu .icon-facebook {
+            color: #00ffff;
+        }
+
+
+#toggle {
+    display: none;
+    background: #fff;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.inner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#toggle {
+    display: none;
+    background: #fff;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.inner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul#main-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    ul#main-menu a {
+        text-transform: uppercase;
+        padding: 10px 10px;
+        display: block;
+        font-weight: bold;
+        position: relative;
+    }
+
+#content {
+    margin-top: 100px;
+}
+
+ul#main-menu a::after
+{
+    content: "";
+    height: 3px;
+    width: 0;
+    background: #000;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+ul#main-menu a:hover::after
+{
+    width: 100%;
+    background-color: #007bff; /* Màu xanh */
+}
+
+ul#main-menu .icon-facebook:hover::after {
+    width: 0;
+}
+
+ul#main-menu .icon-youtube:hover::after {
+    width: 0;
+}
+
+:root {
+    --transition-effect: 0.25s cubic-bezier(.25, -0.59, .82, 1.66);
+}
+
+.horizontal-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+    .horizontal-menu li {
+        display: inline-block;
+        margin-right: 20px; /* Khoảng cách giữa các mục */
+    }
+
+        .horizontal-menu li:last-child {
+            margin-right: 0; /* Loại bỏ khoảng cách của mục cuối cùng */
+        }
+
+body.dark {
+    background: #000;
+}
+
+    body.dark a {
+        color: white;
+    }
+
+    body.dark #logo {
+        color: white;
+    }
+
+    body.dark header {
+        border-bottom: 1px solid #fff;
+        background: #000;
+    }
+
+    body.dark .display-4{
+        color: white;
+    }
+
+    #light_dark {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 5px;
+    }
+
+.switch-toggle {
+    width: 33px;
+    height: 20px;
+    appearance: none;
+    background: rgb(0, 0, 0);
+    border-radius: 26px;
+    position: relative;
+    cursor: pointer;
+    box-shadow: inset 0px 0px 16px rgba(0, 0, 0, .3);
+    transition: var(--transition-effect);
+}
+
+    .switch-toggle:checked {
+        background: rgb(12, 168, 196);
+    }
+
+        .switch-toggle:checked:before {
+            left: 16px;
+            background-color: #fff;
+        }
+
+    .switch-toggle::before {
+        content: "";
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        background-color: rgb(255, 255, 255);
+        border-radius: 50%;
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, .3);
+        transition: var(--transition-effect);
+    }
+
+
