@@ -164,13 +164,13 @@ namespace SV20T1080053
 
         //TODO: Định nghĩa các role được sử dụng trong hệ thống tại đây
 
-        [Display(Name = "Quản trị hệ thống")]
-        public const string Administrator = "admin";
+        //[Display(Name = "Quản trị hệ thống")]
+        //public const string Administrator = "admin";
 
-        [Display(Name = "Cộng tác viên")]
-        public const string Moderator = "mod";
+        [Display(Name = "Nhân viên")]
+        public const string Staff = "staff";
 
-        [Display(Name = "Thành viên")]
-        public const string Member = "member";
+        [Display(Name = "Khách hàng")]
+        public const string Customer = "customer";
     }
 }

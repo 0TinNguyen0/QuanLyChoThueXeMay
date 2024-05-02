@@ -14,6 +14,7 @@ namespace SV20T1080053.DataLayers
     {
         UserAccount? Authorize(string userName, string password);
 
-        bool ChangePassword(string userName, string password);
+
+        bool Register(UserAccount userAccount);
     }
 }

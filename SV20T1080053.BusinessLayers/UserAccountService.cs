@@ -1,4 +1,5 @@
 ﻿using SV20T1080053.DataLayers;
+using SV20T1080053.DataLayers.SQLServer;
 using SV20T1080053.DomainModels;
 using System;
 using System.Collections.Generic;
@@ -21,18 +22,23 @@ namespace SV20T1080053.BusinessLayers
             UserAccountDB = new DataLayers.SQLServer.UserAccountDAL(connectionString);
         }
 
-        public static UserAccount? Authorize(string userName, string password, TypeOfAccount typeOfAccount)
+        public static UserAccount? Authorize(string email, string password, TypeOfAccount typeOfAccount)
         {
             switch (typeOfAccount)
             {
                 case TypeOfAccount.User:
-                    return UserAccountDB.Authorize(userName, password);
+                    return UserAccountDB.Authorize(email, password);
                 default:
                     return null;
             }
         }
-    }
+        public static bool Register(UserAccount userAccount)
+        {
+            // Call the Register method from UserAccountDAL to add new user to the database
+            return UserAccountDB.Register(userAccount);
+        }
 
+    }
     public enum TypeOfAccount { User
     }
 }
