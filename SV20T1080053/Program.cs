@@ -1,11 +1,20 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using SV20T1080053;
 using SV20T1080053.AppCodes;
+using SV20T1080053.DataLayers.EFCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("connectionString");
+
+builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(connectionString));
+
 // B? sung các service c?n dùng:
+
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddMvc();
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(option =>
     {
