@@ -25,9 +25,9 @@ namespace SV20T1080053.DomainModels
     public class MotocycleBrand
     {
         [Key]
-        public int Brand_ID { get; set; }
+        public int BrandId { get; set; }
 
-        public Brand_Name Brand_Name { get; set; }
+        public Brand_Name BrandName { get; set; }
 
         //Relationship
         public IEnumerable<Motorcycle> Motorcycles { get; set; }

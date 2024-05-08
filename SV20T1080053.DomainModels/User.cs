@@ -16,15 +16,15 @@ namespace SV20T1080053.DomainModels
     public class User
     {
         [Key]
-        public int User_ID { get; set; }
+        public int UserId { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string Full_Name { get; set; } = string.Empty;
+        public string FullName { get; set; } = string.Empty;
 
         [Required]
         [DataType(DataType.DateTime)]
-        public string Birth_Date { get; set; } = string.Empty;
+        public string BirthDate { get; set; } = string.Empty;
 
         [Required]
         [DataType(DataType.Password)]

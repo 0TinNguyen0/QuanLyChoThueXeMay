@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SV20T1080053.DataLayers.EFCore;
 
@@ -11,9 +12,11 @@ using SV20T1080053.DataLayers.EFCore;
 namespace SV20T1080053.DataLayers.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240508075319_updatedatabase-v2")]
+    partial class updatedatabasev2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,6 +36,9 @@ namespace SV20T1080053.DataLayers.Migrations
                     b.Property<DateTime>("InvoiceDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("MotocycleStatusSatatusId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
 
@@ -48,9 +54,9 @@ namespace SV20T1080053.DataLayers.Migrations
 
                     b.HasKey("InvoiceId");
 
-                    b.HasIndex("RentalId");
+                    b.HasIndex("MotocycleStatusSatatusId");
 
-                    b.HasIndex("StatusId");
+                    b.HasIndex("RentalId");
 
                     b.ToTable("Invoices");
                 });
@@ -73,17 +79,17 @@ namespace SV20T1080053.DataLayers.Migrations
 
             modelBuilder.Entity("SV20T1080053.DomainModels.MotocycleStatus", b =>
                 {
-                    b.Property<int>("StatusId")
+                    b.Property<int>("SatatusId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StatusId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SatatusId"));
 
                     b.Property<int>("StatusName")
                         .HasMaxLength(50)
                         .HasColumnType("int");
 
-                    b.HasKey("StatusId");
+                    b.HasKey("SatatusId");
 
                     b.ToTable("MotocycleStatus");
                 });
@@ -288,21 +294,21 @@ namespace SV20T1080053.DataLayers.Migrations
 
             modelBuilder.Entity("SV20T1080053.DomainModels.Invoice", b =>
                 {
+                    b.HasOne("SV20T1080053.DomainModels.MotocycleStatus", "MotocycleStatus")
+                        .WithMany("Invoices")
+                        .HasForeignKey("MotocycleStatusSatatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("SV20T1080053.DomainModels.Rental", "Rental")
                         .WithMany("Invoices")
                         .HasForeignKey("RentalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SV20T1080053.DomainModels.MotocycleStatus", "Status")
-                        .WithMany("Invoices")
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("MotocycleStatus");
 
                     b.Navigation("Rental");
-
-                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.Motorcycle", b =>

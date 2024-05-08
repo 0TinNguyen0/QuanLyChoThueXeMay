@@ -16,11 +16,11 @@ namespace SV20T1080053.DomainModels
     public class MotocycleType
     {
         [Key]
-        public int Type_ID { get; set; }
+        public int TypeId { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Name { get; set; } = string.Empty;
+        public string TypeName { get; set; } = string.Empty;
 
         //Relationship
         public IEnumerable<Motorcycle> Motorcycles { get; set; }

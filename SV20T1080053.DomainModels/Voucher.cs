@@ -12,7 +12,7 @@ namespace SV20T1080053.DomainModels
     public class Voucher
     {
         [Key]
-        public int Voucher_ID { get; set; }
+        public int VoucherId { get; set; }
 
         public string name { get; set; }
     }

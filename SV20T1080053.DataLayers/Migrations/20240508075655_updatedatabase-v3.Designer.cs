@@ -12,8 +12,8 @@ using SV20T1080053.DataLayers.EFCore;
 namespace SV20T1080053.DataLayers.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240508033409_createdatabasee")]
-    partial class createdatabasee
+    [Migration("20240508075655_updatedatabase-v3")]
+    partial class updatedatabasev3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,106 +27,98 @@ namespace SV20T1080053.DataLayers.Migrations
 
             modelBuilder.Entity("SV20T1080053.DomainModels.Invoice", b =>
                 {
-                    b.Property<int>("Invoice_ID")
+                    b.Property<int>("InvoiceId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Invoice_ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceId"));
 
-                    b.Property<DateTime>("Invoice_Date")
+                    b.Property<DateTime>("InvoiceDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MotocycleStatusSatatus_ID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Payment_Date")
+                    b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Rental_ID")
+                    b.Property<int>("RentalId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rental_ID1")
+                    b.Property<int>("StatusId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Total_Amount")
+                    b.Property<decimal>("TotalAmount")
                         .HasMaxLength(50)
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Invoice_ID");
+                    b.HasKey("InvoiceId");
 
-                    b.HasIndex("MotocycleStatusSatatus_ID");
+                    b.HasIndex("RentalId");
 
-                    b.HasIndex("Rental_ID1");
+                    b.HasIndex("StatusId");
 
                     b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.MotocycleBrand", b =>
                 {
-                    b.Property<int>("Brand_ID")
+                    b.Property<int>("BrandId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Brand_ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BrandId"));
 
-                    b.Property<int>("Brand_Name")
+                    b.Property<int>("BrandName")
                         .HasColumnType("int");
 
-                    b.HasKey("Brand_ID");
+                    b.HasKey("BrandId");
 
                     b.ToTable("MotocycleBrands");
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.MotocycleStatus", b =>
                 {
-                    b.Property<int>("Satatus_ID")
+                    b.Property<int>("SatatusId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Satatus_ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SatatusId"));
 
-                    b.Property<int>("Status_Name")
+                    b.Property<int>("StatusName")
                         .HasMaxLength(50)
                         .HasColumnType("int");
 
-                    b.HasKey("Satatus_ID");
+                    b.HasKey("SatatusId");
 
                     b.ToTable("MotocycleStatus");
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.MotocycleType", b =>
                 {
-                    b.Property<int>("Type_ID")
+                    b.Property<int>("TypeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Type_ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TypeId"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("TypeName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("Type_ID");
+                    b.HasKey("TypeId");
 
                     b.ToTable("MotocycleTypes");
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.Motorcycle", b =>
                 {
-                    b.Property<int>("Motorcycle_ID")
+                    b.Property<int>("MotorcycleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Motorcycle_ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MotorcycleId"));
 
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -137,12 +129,6 @@ namespace SV20T1080053.DataLayers.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<int?>("MotocycleBrandBrand_ID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MotocycleTypeType_ID")
-                        .HasColumnType("int");
 
                     b.Property<string>("Photo")
                         .IsRequired()
@@ -157,103 +143,91 @@ namespace SV20T1080053.DataLayers.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("User_ID")
+                    b.Property<int>("TypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("User_ID1")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Year")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Motorcycle_ID");
+                    b.HasKey("MotorcycleId");
 
-                    b.HasIndex("MotocycleBrandBrand_ID");
+                    b.HasIndex("BrandId");
 
-                    b.HasIndex("MotocycleTypeType_ID");
+                    b.HasIndex("TypeId");
 
-                    b.HasIndex("User_ID1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Motorcycles");
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.Payment", b =>
                 {
-                    b.Property<int>("Payment_ID")
+                    b.Property<int>("PaymentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Payment_ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"));
 
                     b.Property<decimal>("Money")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("PaymentMethodMethods_ID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Payment_Date")
+                    b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Payment_Method")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("Rental_ID")
+                    b.Property<int>("PaymentMethodId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rental_ID1")
+                    b.Property<int>("RentalId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("Payment_ID");
+                    b.HasKey("PaymentId");
 
-                    b.HasIndex("PaymentMethodMethods_ID");
+                    b.HasIndex("PaymentMethodId");
 
-                    b.HasIndex("Rental_ID1");
+                    b.HasIndex("RentalId");
 
-                    b.ToTable("Payment");
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.PaymentMethod", b =>
                 {
-                    b.Property<int>("Methods_ID")
+                    b.Property<int>("PaymentMethodId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Methods_ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentMethodId"));
 
-                    b.Property<int>("Method_Name")
+                    b.Property<string>("MethodName")
+                        .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("Methods_ID");
+                    b.HasKey("PaymentMethodId");
 
                     b.ToTable("PaymentMethods");
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.Rental", b =>
                 {
-                    b.Property<int>("Rental_ID")
+                    b.Property<int>("RentalId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Rental_ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RentalId"));
 
-                    b.Property<DateTime>("End_Date")
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Motorcycle_ID")
+                    b.Property<int>("MotorcycleId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Start_Date")
+                    b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
@@ -261,31 +235,28 @@ namespace SV20T1080053.DataLayers.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("Total_Price")
+                    b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("User_ID")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("User_ID1")
-                        .HasColumnType("int");
+                    b.HasKey("RentalId");
 
-                    b.HasKey("Rental_ID");
-
-                    b.HasIndex("User_ID1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Rentals");
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.User", b =>
                 {
-                    b.Property<int>("User_ID")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("User_ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
-                    b.Property<string>("Birth_Date")
+                    b.Property<string>("BirthDate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -293,7 +264,7 @@ namespace SV20T1080053.DataLayers.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Full_Name")
+                    b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -313,49 +284,53 @@ namespace SV20T1080053.DataLayers.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("User_ID");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.Invoice", b =>
                 {
-                    b.HasOne("SV20T1080053.DomainModels.MotocycleStatus", "MotocycleStatus")
-                        .WithMany("Invoices")
-                        .HasForeignKey("MotocycleStatusSatatus_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("SV20T1080053.DomainModels.Rental", "Rental")
                         .WithMany("Invoices")
-                        .HasForeignKey("Rental_ID1")
+                        .HasForeignKey("RentalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("MotocycleStatus");
+                    b.HasOne("SV20T1080053.DomainModels.MotocycleStatus", "Status")
+                        .WithMany("Invoices")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Rental");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.Motorcycle", b =>
                 {
-                    b.HasOne("SV20T1080053.DomainModels.MotocycleBrand", null)
+                    b.HasOne("SV20T1080053.DomainModels.MotocycleBrand", "Brand")
                         .WithMany("Motorcycles")
-                        .HasForeignKey("MotocycleBrandBrand_ID");
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("SV20T1080053.DomainModels.MotocycleType", "MotocycleType")
+                    b.HasOne("SV20T1080053.DomainModels.MotocycleType", "Type")
                         .WithMany("Motorcycles")
-                        .HasForeignKey("MotocycleTypeType_ID")
+                        .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SV20T1080053.DomainModels.User", "User")
                         .WithMany("Motorcycles")
-                        .HasForeignKey("User_ID1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("MotocycleType");
+                    b.Navigation("Brand");
+
+                    b.Navigation("Type");
 
                     b.Navigation("User");
                 });
@@ -364,13 +339,13 @@ namespace SV20T1080053.DataLayers.Migrations
                 {
                     b.HasOne("SV20T1080053.DomainModels.PaymentMethod", "PaymentMethod")
                         .WithMany("Payments")
-                        .HasForeignKey("PaymentMethodMethods_ID")
+                        .HasForeignKey("PaymentMethodId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SV20T1080053.DomainModels.Rental", "Rental")
                         .WithMany("Payments")
-                        .HasForeignKey("Rental_ID1")
+                        .HasForeignKey("RentalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -383,7 +358,7 @@ namespace SV20T1080053.DataLayers.Migrations
                 {
                     b.HasOne("SV20T1080053.DomainModels.User", "User")
                         .WithMany("Rentals")
-                        .HasForeignKey("User_ID1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

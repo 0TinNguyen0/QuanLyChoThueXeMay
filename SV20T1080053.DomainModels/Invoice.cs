@@ -16,28 +16,28 @@ namespace SV20T1080053.DomainModels
     public class Invoice
     {
         [Key]
-        public int Invoice_ID { get; set; }
+        public int InvoiceId { get; set; }
 
-        [ForeignKey("Rental_ID")]
-        public int Rental_ID { get; set; }
+        [ForeignKey("RentalId")]
+        public int RentalId { get; set; }
 
         [Required]
         [MaxLength(50)]
-        public decimal Total_Amount { get; set; } 
+        public decimal TotalAmount { get; set; } 
         [Required]
         [DataType(DataType.DateTime)]
-        public DateTime Invoice_Date { get; set; } = DateTime.Now;
+        public DateTime InvoiceDate { get; set; } = DateTime.Now;
 
         [Required]
         [DataType(DataType.DateTime)]
-        public DateTime Payment_Date {  get; set; } = DateTime.Now;
+        public DateTime PaymentDate {  get; set; } = DateTime.Now;
 
-        [Required]
-        public int Status { get; set; }
+        [ForeignKey("StatusId")]
+        public int StatusId { get; set; }
 
 
         //Relationship
-        public MotocycleStatus MotocycleStatus {  get; set; }
+        public MotocycleStatus Status {  get; set; }
         public Rental Rental { get; set; }
     }
 }

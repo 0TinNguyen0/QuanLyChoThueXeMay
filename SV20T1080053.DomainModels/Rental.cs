@@ -16,23 +16,23 @@ namespace SV20T1080053.DomainModels
     public class Rental
     {
         [Key]
-        public int Rental_ID { get; set; }
+        public int RentalId { get; set; }
 
         [ForeignKey("Users")]
-        public int User_ID { get; set; }
-        public int Motorcycle_ID { get; set; }
+        public int UserId { get; set; }
+        public int MotorcycleId { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
-        public DateTime Start_Date {  get; set; } = DateTime.Now;
+        public DateTime StartDate {  get; set; } = DateTime.Now;
 
         [Required]
         [DataType(DataType.DateTime)]
-        public DateTime End_Date { get; set;} = DateTime.Now;
+        public DateTime EndDate { get; set;} = DateTime.Now;
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal Total_Price { get; set; }
+        public decimal TotalPrice { get; set; }
         
         [Required]
         [StringLength(50)]

@@ -24,10 +24,10 @@ namespace SV20T1080053.DomainModels
     public class Payment
     {
         [Key]
-        public int Payment_ID { get; set; }
+        public int PaymentId { get; set; }
 
-        [ForeignKey("Rental_ID")]
-        public int Rental_ID { get; set; }
+        [ForeignKey("RentalId")]
+        public int RentalId { get; set; }
 
 
         [Required]
@@ -36,13 +36,12 @@ namespace SV20T1080053.DomainModels
 
         public PaymentStatus Status { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Payment_Method { get; set; }
+        [ForeignKey("PaymentMethodId")]
+        public int PaymentMethodId { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
-        public DateTime Payment_Date { get; set;} = DateTime.Now;
+        public DateTime PaymentDate { get; set;} = DateTime.Now;
 
         //Relationship
         public Rental Rental { get; set; }

@@ -24,11 +24,11 @@ namespace SV20T1080053.DomainModels
     public class MotocycleStatus
     {
         [Key]
-        public int Satatus_ID { get; set; }
+        public int StatusId { get; set; }
 
         [Required]
         [StringLength(50)]
-        public Status Status_Name { get; set; } 
+        public Status StatusName { get; set; } 
 
         //Relationship
         public IEnumerable<Invoice>  Invoices { get; set; }

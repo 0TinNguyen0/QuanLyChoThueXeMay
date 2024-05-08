@@ -12,8 +12,8 @@ namespace SV20T1080053.BusinessLayers.Services
         public interface IUserService
         {
             Task<bool> CreateUserAsync(User newUser);
-            Task<bool> UpdateUserAsync(User data, List<IFormFile>? photo);
-            Task<bool> DeleteUserAsync(User deleteUser);
+            //Task<bool> UpdateUserAsync(User data, List<IFormFile>? photo);
+            //Task<bool> DeleteUserAsync(User deleteUser);
         }
     }
 }

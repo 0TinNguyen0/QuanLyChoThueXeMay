@@ -16,18 +16,16 @@ namespace SV20T1080053.DomainModels
     public class Motorcycle
     {
         [Key]
-        public int Motorcycle_ID { get; set; }
+        public int MotorcycleId { get; set; }
 
-        [ForeignKey("User_ID")]
-        public int User_ID { get; set; }
+        [ForeignKey("UserId")]
+        public int UserId { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Brand { get; set; } = string.Empty;
+        [ForeignKey("BrandId")]
+        public int BrandId { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Type { get; set; } = string.Empty;
+        [ForeignKey("TypeId")]
+        public int TypeId { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
@@ -56,6 +54,8 @@ namespace SV20T1080053.DomainModels
 
         //Relationship
         public User User { get; set; }
-        public MotocycleType MotocycleType { get; set; }
+        public MotocycleType Type { get; set; }
+
+        public MotocycleBrand Brand { get; set; }
     }
 }

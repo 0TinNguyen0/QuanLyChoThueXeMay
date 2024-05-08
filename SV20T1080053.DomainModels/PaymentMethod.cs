@@ -23,11 +23,11 @@ namespace SV20T1080053.DomainModels
     public class PaymentMethod
     {
         [Key]
-        public int Methods_ID { get; set; }
+        public int PaymentMethodId { get; set; }
 
         [Required]
         [MaxLength(50)]
-        public Method_Name  Method_Name { get; set; } 
+        public string MethodName { get; set; } = string.Empty;
 
         //Relationship
         public IEnumerable<Payment> Payments { get; set; }

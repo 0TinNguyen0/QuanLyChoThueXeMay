@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SV20T1080053.DataLayers.Migrations
 {
     /// <inheritdoc />
-    public partial class createdatabase : Migration
+    public partial class updatedatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,62 +15,62 @@ namespace SV20T1080053.DataLayers.Migrations
                 name: "MotocycleBrands",
                 columns: table => new
                 {
-                    BrandID = table.Column<int>(name: "Brand_ID", type: "int", nullable: false)
+                    BrandId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BrandName = table.Column<int>(name: "Brand_Name", type: "int", nullable: false)
+                    BrandName = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MotocycleBrands", x => x.BrandID);
+                    table.PrimaryKey("PK_MotocycleBrands", x => x.BrandId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "MotocycleStatus",
                 columns: table => new
                 {
-                    SatatusID = table.Column<int>(name: "Satatus_ID", type: "int", nullable: false)
+                    SatatusId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StatusName = table.Column<int>(name: "Status_Name", type: "int", maxLength: 50, nullable: false)
+                    StatusName = table.Column<int>(type: "int", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MotocycleStatus", x => x.SatatusID);
+                    table.PrimaryKey("PK_MotocycleStatus", x => x.SatatusId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "MotocycleType",
+                name: "MotocycleTypes",
                 columns: table => new
                 {
-                    TypeID = table.Column<int>(name: "Type_ID", type: "int", nullable: false)
+                    TypeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    TypeName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MotocycleType", x => x.TypeID);
+                    table.PrimaryKey("PK_MotocycleTypes", x => x.TypeId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "PaymentMethods",
                 columns: table => new
                 {
-                    MethodsID = table.Column<int>(name: "Methods_ID", type: "int", nullable: false)
+                    PaymentMethodId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MethodName = table.Column<int>(name: "Method_Name", type: "int", maxLength: 50, nullable: false)
+                    MethodName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PaymentMethods", x => x.MethodsID);
+                    table.PrimaryKey("PK_PaymentMethods", x => x.PaymentMethodId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
-                    UserID = table.Column<int>(name: "User_ID", type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FullName = table.Column<string>(name: "Full_Name", type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    BirthDate = table.Column<string>(name: "Birth_Date", type: "nvarchar(max)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    BirthDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Photo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -78,7 +78,7 @@ namespace SV20T1080053.DataLayers.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserID);
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,7 +87,7 @@ namespace SV20T1080053.DataLayers.Migrations
                 {
                     MotorcycleID = table.Column<int>(name: "Motorcycle_ID", type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<int>(name: "User_ID", type: "int", nullable: false),
+                    UserId = table.Column<int>(name: "User_Id", type: "int", nullable: false),
                     Brand = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Year = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -96,29 +96,29 @@ namespace SV20T1080053.DataLayers.Migrations
                     Description = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     RentalPrice = table.Column<decimal>(name: "Rental_Price", type: "decimal(18,2)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    UserID1 = table.Column<int>(name: "User_ID1", type: "int", nullable: false),
-                    MotocycleTypeTypeID = table.Column<int>(name: "MotocycleTypeType_ID", type: "int", nullable: false),
-                    MotocycleBrandBrandID = table.Column<int>(name: "MotocycleBrandBrand_ID", type: "int", nullable: true)
+                    UserId0 = table.Column<int>(name: "UserId", type: "int", nullable: false),
+                    MotocycleTypeTypeId = table.Column<int>(type: "int", nullable: false),
+                    MotocycleBrandBrandId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Motorcycles", x => x.MotorcycleID);
                     table.ForeignKey(
-                        name: "FK_Motorcycles_MotocycleBrands_MotocycleBrandBrand_ID",
-                        column: x => x.MotocycleBrandBrandID,
+                        name: "FK_Motorcycles_MotocycleBrands_MotocycleBrandBrandId",
+                        column: x => x.MotocycleBrandBrandId,
                         principalTable: "MotocycleBrands",
-                        principalColumn: "Brand_ID");
+                        principalColumn: "BrandId");
                     table.ForeignKey(
-                        name: "FK_Motorcycles_MotocycleType_MotocycleTypeType_ID",
-                        column: x => x.MotocycleTypeTypeID,
-                        principalTable: "MotocycleType",
-                        principalColumn: "Type_ID",
+                        name: "FK_Motorcycles_MotocycleTypes_MotocycleTypeTypeId",
+                        column: x => x.MotocycleTypeTypeId,
+                        principalTable: "MotocycleTypes",
+                        principalColumn: "TypeId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Motorcycles_Users_User_ID1",
-                        column: x => x.UserID1,
+                        name: "FK_Motorcycles_Users_UserId",
+                        column: x => x.UserId0,
                         principalTable: "Users",
-                        principalColumn: "User_ID",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -126,24 +126,23 @@ namespace SV20T1080053.DataLayers.Migrations
                 name: "Rentals",
                 columns: table => new
                 {
-                    RentalID = table.Column<int>(name: "Rental_ID", type: "int", nullable: false)
+                    RentalId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<int>(name: "User_ID", type: "int", nullable: false),
-                    MotorcycleID = table.Column<int>(name: "Motorcycle_ID", type: "int", nullable: false),
-                    StartDate = table.Column<DateTime>(name: "Start_Date", type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(name: "End_Date", type: "datetime2", nullable: false),
-                    TotalPrice = table.Column<decimal>(name: "Total_Price", type: "decimal(18,2)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    UserID1 = table.Column<int>(name: "User_ID1", type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    MotorcycleId = table.Column<int>(type: "int", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rentals", x => x.RentalID);
+                    table.PrimaryKey("PK_Rentals", x => x.RentalId);
                     table.ForeignKey(
-                        name: "FK_Rentals_Users_User_ID1",
-                        column: x => x.UserID1,
+                        name: "FK_Rentals_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "User_ID",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -151,103 +150,101 @@ namespace SV20T1080053.DataLayers.Migrations
                 name: "Invoices",
                 columns: table => new
                 {
-                    InvoiceID = table.Column<int>(name: "Invoice_ID", type: "int", nullable: false)
+                    InvoiceId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RentalID = table.Column<int>(name: "Rental_ID", type: "int", nullable: false),
-                    TotalAmount = table.Column<decimal>(name: "Total_Amount", type: "decimal(18,2)", maxLength: 50, nullable: false),
+                    RentalId = table.Column<int>(type: "int", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", maxLength: 50, nullable: false),
                     InvoiceDate = table.Column<DateTime>(name: "Invoice_Date", type: "datetime2", nullable: false),
                     PaymentDate = table.Column<DateTime>(name: "Payment_Date", type: "datetime2", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    MotocycleStatusSatatusID = table.Column<int>(name: "MotocycleStatusSatatus_ID", type: "int", nullable: false),
-                    RentalID1 = table.Column<int>(name: "Rental_ID1", type: "int", nullable: false)
+                    MotocycleStatusSatatusId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Invoices", x => x.InvoiceID);
+                    table.PrimaryKey("PK_Invoices", x => x.InvoiceId);
                     table.ForeignKey(
-                        name: "FK_Invoices_MotocycleStatus_MotocycleStatusSatatus_ID",
-                        column: x => x.MotocycleStatusSatatusID,
+                        name: "FK_Invoices_MotocycleStatus_MotocycleStatusSatatusId",
+                        column: x => x.MotocycleStatusSatatusId,
                         principalTable: "MotocycleStatus",
-                        principalColumn: "Satatus_ID",
+                        principalColumn: "SatatusId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Invoices_Rentals_Rental_ID1",
-                        column: x => x.RentalID1,
+                        name: "FK_Invoices_Rentals_RentalId",
+                        column: x => x.RentalId,
                         principalTable: "Rentals",
-                        principalColumn: "Rental_ID",
+                        principalColumn: "RentalId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Payment",
+                name: "Payments",
                 columns: table => new
                 {
-                    PaymentID = table.Column<int>(name: "Payment_ID", type: "int", nullable: false)
+                    PaymentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RentalID = table.Column<int>(name: "Rental_ID", type: "int", nullable: false),
                     Money = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    PaymentMethod = table.Column<string>(name: "Payment_Method", type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PaymentDate = table.Column<DateTime>(name: "Payment_Date", type: "datetime2", nullable: false),
-                    RentalID1 = table.Column<int>(name: "Rental_ID1", type: "int", nullable: false),
-                    PaymentMethodMethodsID = table.Column<int>(name: "PaymentMethodMethods_ID", type: "int", nullable: false)
+                    PaymentMethodId = table.Column<int>(type: "int", nullable: false),
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RentalId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Payment", x => x.PaymentID);
+                    table.PrimaryKey("PK_Payments", x => x.PaymentId);
                     table.ForeignKey(
-                        name: "FK_Payment_PaymentMethods_PaymentMethodMethods_ID",
-                        column: x => x.PaymentMethodMethodsID,
+                        name: "FK_Payments_PaymentMethods_PaymentMethodId",
+                        column: x => x.PaymentMethodId,
                         principalTable: "PaymentMethods",
-                        principalColumn: "Methods_ID",
+                        principalColumn: "PaymentMethodId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Payment_Rentals_Rental_ID1",
-                        column: x => x.RentalID1,
+                        name: "FK_Payments_Rentals_RentalId",
+                        column: x => x.RentalId,
                         principalTable: "Rentals",
-                        principalColumn: "Rental_ID",
+                        principalColumn: "RentalId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Invoices_MotocycleStatusSatatus_ID",
+                name: "IX_Invoices_MotocycleStatusSatatusId",
                 table: "Invoices",
-                column: "MotocycleStatusSatatus_ID");
+                column: "MotocycleStatusSatatusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Invoices_Rental_ID1",
+                name: "IX_Invoices_RentalId",
                 table: "Invoices",
-                column: "Rental_ID1");
+                column: "RentalId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Motorcycles_MotocycleBrandBrand_ID",
+                name: "IX_Motorcycles_MotocycleBrandBrandId",
                 table: "Motorcycles",
-                column: "MotocycleBrandBrand_ID");
+                column: "MotocycleBrandBrandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Motorcycles_MotocycleTypeType_ID",
+                name: "IX_Motorcycles_MotocycleTypeTypeId",
                 table: "Motorcycles",
-                column: "MotocycleTypeType_ID");
+                column: "MotocycleTypeTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Motorcycles_User_ID1",
+                name: "IX_Motorcycles_UserId",
                 table: "Motorcycles",
-                column: "User_ID1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payment_PaymentMethodMethods_ID",
-                table: "Payment",
-                column: "PaymentMethodMethods_ID");
+                name: "IX_Payments_PaymentMethodId",
+                table: "Payments",
+                column: "PaymentMethodId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payment_Rental_ID1",
-                table: "Payment",
-                column: "Rental_ID1");
+                name: "IX_Payments_RentalId",
+                table: "Payments",
+                column: "RentalId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rentals_User_ID1",
+                name: "IX_Rentals_UserId",
                 table: "Rentals",
-                column: "User_ID1");
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -260,7 +257,7 @@ namespace SV20T1080053.DataLayers.Migrations
                 name: "Motorcycles");
 
             migrationBuilder.DropTable(
-                name: "Payment");
+                name: "Payments");
 
             migrationBuilder.DropTable(
                 name: "MotocycleStatus");
@@ -269,7 +266,7 @@ namespace SV20T1080053.DataLayers.Migrations
                 name: "MotocycleBrands");
 
             migrationBuilder.DropTable(
-                name: "MotocycleType");
+                name: "MotocycleTypes");
 
             migrationBuilder.DropTable(
                 name: "PaymentMethods");
