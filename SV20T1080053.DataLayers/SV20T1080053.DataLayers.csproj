@@ -21,8 +21,4 @@
     <ProjectReference Include="..\SV20T1080053.DomainModels\SV20T1080053.DomainModels.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\Implemention\" />
-  </ItemGroup>
-
 </Project>

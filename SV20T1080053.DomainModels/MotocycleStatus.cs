@@ -13,6 +13,13 @@ namespace SV20T1080053.DomainModels
     /// 
     /// </summary>
     /// 
+
+    public enum Status
+    {
+        NotRented,
+        Rented,
+    }
+
     [Table("MotocycleStatus")]
     public class MotocycleStatus
     {
@@ -21,7 +28,7 @@ namespace SV20T1080053.DomainModels
 
         [Required]
         [StringLength(50)]
-        public string Name { get; set; } = string.Empty;
+        public Status Status_Name { get; set; } 
 
         //Relationship
         public IEnumerable<Invoice>  Invoices { get; set; }

@@ -12,7 +12,7 @@ namespace SV20T1080053.DomainModels
     /// 
     /// </summary>
     /// 
-    [Table("MotocycleType")]
+    [Table("MotocycleTypes")]
     public class MotocycleType
     {
         [Key]

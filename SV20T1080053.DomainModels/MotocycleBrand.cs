@@ -12,15 +12,22 @@ namespace SV20T1080053.DomainModels
     /// 
     /// </summary>
     /// 
+
+    public enum Brand_Name
+    {
+        Honda,
+        Yamaha,
+        Suzuki,
+    }
+
+
     [Table("MotocycleBrands")]
     public class MotocycleBrand
     {
         [Key]
         public int Brand_ID { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Name { get; set; } = string.Empty;
+        public Brand_Name Brand_Name { get; set; }
 
         //Relationship
         public IEnumerable<Motorcycle> Motorcycles { get; set; }

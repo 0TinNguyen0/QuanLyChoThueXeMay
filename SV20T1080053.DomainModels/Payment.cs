@@ -12,7 +12,15 @@ namespace SV20T1080053.DomainModels
     /// 
     /// </summary>
     /// 
-    [Table("Payment")]
+    public enum PaymentStatus
+    {
+        COMPLETED,
+        FAILED,
+        CANCELED,
+    }
+
+
+    [Table("Payments")]
     public class Payment
     {
         [Key]
@@ -25,6 +33,8 @@ namespace SV20T1080053.DomainModels
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Money { get; set; }
+
+        public PaymentStatus Status { get; set; }
 
         [Required]
         [StringLength(50)]

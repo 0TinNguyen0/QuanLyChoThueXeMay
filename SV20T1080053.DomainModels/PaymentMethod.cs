@@ -12,6 +12,13 @@ namespace SV20T1080053.DomainModels
     /// 
     /// </summary>
     /// 
+    public enum Method_Name
+    {
+        CashPayment,
+        BankTransfer,
+        Credit,
+    }
+
     [Table("PaymentMethods")]
     public class PaymentMethod
     {
@@ -20,7 +27,7 @@ namespace SV20T1080053.DomainModels
 
         [Required]
         [MaxLength(50)]
-        public string Name { get; set; } = string.Empty;
+        public Method_Name  Method_Name { get; set; } 
 
         //Relationship
         public IEnumerable<Payment> Payments { get; set; }
