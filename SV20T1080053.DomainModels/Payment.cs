@@ -18,7 +18,12 @@ namespace SV20T1080053.DomainModels
         FAILED,
         CANCELED,
     }
-
+    public enum MethodName
+    {
+        CashPayment,
+        BankTransfer,
+        Credit,
+    }
 
     [Table("Payments")]
     public class Payment
@@ -34,17 +39,16 @@ namespace SV20T1080053.DomainModels
         [Column(TypeName = "decimal(18,2)")]
         public decimal Money { get; set; }
 
-        public PaymentStatus Status { get; set; }
-
         [ForeignKey("PaymentMethodId")]
         public int PaymentMethodId { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime PaymentDate { get; set;} = DateTime.Now;
+        public PaymentStatus Status { get; set; }
+        public MethodName MethodName { get; set; }
 
         //Relationship
         public Rental Rental { get; set; }
-        public PaymentMethod PaymentMethod { get; set; }
     }
 }

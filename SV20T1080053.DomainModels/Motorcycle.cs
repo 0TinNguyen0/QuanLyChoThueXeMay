@@ -12,6 +12,20 @@ namespace SV20T1080053.DomainModels
     /// 
     /// </summary>
     /// 
+
+    public enum Brand
+    {
+        Honda,
+        Yamaha,
+        Suzuki,
+    }
+
+    public enum Type
+    {
+        Manual,
+        Automatic,
+    }
+
     [Table("Motorcycles")]
     public class Motorcycle
     {
@@ -20,12 +34,8 @@ namespace SV20T1080053.DomainModels
 
         [ForeignKey("UserId")]
         public int UserId { get; set; }
-
-        [ForeignKey("BrandId")]
-        public int BrandId { get; set; }
-
-        [ForeignKey("TypeId")]
-        public int TypeId { get; set; }
+        public Brand Brand { get; set; }
+        public Type Type { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
@@ -54,8 +64,5 @@ namespace SV20T1080053.DomainModels
 
         //Relationship
         public User User { get; set; }
-        public MotocycleType Type { get; set; }
-
-        public MotocycleBrand Brand { get; set; }
     }
 }

@@ -12,6 +12,13 @@ namespace SV20T1080053.DomainModels
     /// 
     /// </summary>
     ///
+
+    public enum InvoiceStatus
+    {
+        NotRent,
+        Rent,
+    }
+
     [Table("Invoices")]
     public class Invoice
     {
@@ -32,12 +39,9 @@ namespace SV20T1080053.DomainModels
         [DataType(DataType.DateTime)]
         public DateTime PaymentDate {  get; set; } = DateTime.Now;
 
-        [ForeignKey("StatusId")]
-        public int StatusId { get; set; }
-
+        public InvoiceStatus Status { get; set; }
 
         //Relationship
-        public MotocycleStatus Status {  get; set; }
         public Rental Rental { get; set; }
     }
 }

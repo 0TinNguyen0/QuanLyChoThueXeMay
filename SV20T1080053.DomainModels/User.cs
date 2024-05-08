@@ -12,6 +12,12 @@ namespace SV20T1080053.DomainModels
     /// thông tin của tài khoản trong SQL 
     /// </summary>
     /// 
+    public enum Roles
+    {
+        Employee,
+        Customer
+    }
+
     [Table("Users")]
     public class User
     {
@@ -42,6 +48,7 @@ namespace SV20T1080053.DomainModels
         [StringLength(50)]
         public string Phone { get; set; } = string.Empty;
 
+        public Roles Role { get; set; }
         //Relationship
         public IEnumerable<Motorcycle> Motorcycles { get; set; }
         public IEnumerable<Rental> Rentals { get; set;}

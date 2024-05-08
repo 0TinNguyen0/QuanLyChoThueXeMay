@@ -16,5 +16,10 @@ namespace SV20T1080053.DataLayers.Repositories.Implementions
         {
             _context = context;
         }
+
+        public Task<User> GetUserAllAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

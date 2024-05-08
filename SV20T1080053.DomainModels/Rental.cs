@@ -12,6 +12,15 @@ namespace SV20T1080053.DomainModels
     /// 
     /// </summary>
     /// 
+
+    public enum Status
+    {
+        Pending,
+        InProgress,
+        Completed,
+        Cancelled
+    }
+
     [Table("Rentals")]
     public class Rental
     {
@@ -34,9 +43,7 @@ namespace SV20T1080053.DomainModels
         [Column(TypeName = "decimal(18,2)")]
         public decimal TotalPrice { get; set; }
         
-        [Required]
-        [StringLength(50)]
-        public string Status {  get; set; } = string.Empty;
+        public Status Status {  get; set; }
 
         //Relationship
         public IEnumerable<Invoice> Invoices { get; set; }

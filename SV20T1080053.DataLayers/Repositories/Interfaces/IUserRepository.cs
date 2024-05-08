@@ -9,5 +9,6 @@ namespace SV20T1080053.DataLayers.Repositories.Interfaces
 {
     public interface IUserRepository : IRepository<User>
     {
+        Task<User> GetUserAllAsync(User user);
     }
 }

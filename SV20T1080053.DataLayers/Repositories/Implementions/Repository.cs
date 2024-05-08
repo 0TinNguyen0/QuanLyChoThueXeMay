@@ -18,32 +18,30 @@ namespace SV20T1080053.DataLayers.Repositories.Implementions
         {
             _context = context;
         }
-        public async Task<List<T>> GetAllAsync()
+
+        public Task<int> CreateAsync(T entity)
         {
-            return await _context.Set<T>().ToListAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task<T> GetByIdAnsync(int? id)
+        public Task<int> DeleteAsync(T entity)
         {
-            return await _context.Set<T>().FindAsync(id);
+            throw new NotImplementedException();
         }
 
-        public async Task<int> CreateAsync(T entity)
+        public Task<List<T>> GetAllAsync()
         {
-            _context.Set<T>().Add(entity);
-            return await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task<int> UpdateASync(T entity)
+        public Task<T> GetByIdAsync(int? id)
         {
-            _context.Entry(entity).State = EntityState.Modified;
-            return await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task<int> DeleteAsync(T entity)
+        public Task<int> UpdateAsync(T entity)
         {
-            _context.Set<T>().Remove(entity);
-            return await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
     }
 }
