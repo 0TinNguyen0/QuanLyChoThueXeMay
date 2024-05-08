@@ -11,4 +11,9 @@
     <ProjectReference Include="..\SV20T1080053.DomainModels\SV20T1080053.DomainModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Implementations\" />
+    <Folder Include="Services\Interfaces\" />
+  </ItemGroup>
+
 </Project>

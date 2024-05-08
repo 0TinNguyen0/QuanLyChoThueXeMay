@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SV20T1080053.DataLayers.Repositories.Implementions
 {
-    public class MotorcycleRepository : Repository<Motorcycle>, IMotorcycleStatusRepository
+    public class MotorcycleRepository : Repository<Motorcycle>, IMotorcycleRepository
     {
         private readonly ApplicationDBContext _context;
         public MotorcycleRepository(ApplicationDBContext context) : base(context)
