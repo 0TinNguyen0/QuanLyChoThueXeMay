@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace SV20T1080053.DataLayers.Repositories.Interfaces
 {
-    public interface IUserAccountRepository
+    public interface IUserRepository
     {
-        Task<IEnumerable<UserAccount>> GetUserAccountAsync();
-        Task<UserAccount> GetUserAccountAsync(int id);
+        Task<IEnumerable<User>> GetUserAccountAsync();
+        Task<User> GetUserAccountAsync(int id);
 
     }
 }

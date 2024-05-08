@@ -23,7 +23,6 @@ namespace SV20T1080053.DomainModels
 
 
         [Required]
-        //[Precision(18, 2)]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Money { get; set; }
 

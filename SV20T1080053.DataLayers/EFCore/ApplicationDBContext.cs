@@ -14,6 +14,15 @@ namespace SV20T1080053.DataLayers.EFCore
         { 
 
         }
-        public DbSet<UserAccount> Users { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Rental> Rentals { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public DbSet<Motorcycle>  Motorcycles { get; set; }
+        public DbSet<MotocycleType> MotocycleTypes { get; set;}
+        public DbSet<MotocycleStatus> MotocycleStatuses { get; set;}
+        public DbSet<MotocycleBrand> MotocycleBrands { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+
     }
 }
