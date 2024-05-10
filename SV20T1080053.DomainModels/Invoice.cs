@@ -20,7 +20,7 @@ namespace SV20T1080053.DomainModels
     }
 
     [Table("Invoices")]
-    public class Invoice
+    public class Invoice : ISoftDelete
     {
         [Key]
         public int InvoiceId { get; set; }
@@ -43,5 +43,7 @@ namespace SV20T1080053.DomainModels
 
         //Relationship
         public Rental Rental { get; set; }
+        public bool IsDeleted { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DateTime? DeletedAt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

@@ -2,19 +2,31 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using SV20T1080053;
 using SV20T1080053.AppCodes;
+using SV20T1080053.BusinessLayers.Services.Implementations;
+using SV20T1080053.BusinessLayers.Services.Interfaces;
 using SV20T1080053.DataLayers.EFCore;
+using SV20T1080053.DataLayers.Repositories.Implementions;
+using SV20T1080053.DataLayers.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("connectionString");
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
-builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<ApplicationDBContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("connectionString"))
+);
 
+builder.Services.AddScoped<ILogger<UserService>, Logger<UserService>>();
+
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
 // B? sung các service c?n dùng:
 
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddMvc();
+
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(option =>
     {
@@ -29,6 +41,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     option.ExpireTimeSpan = TimeSpan.FromMinutes(60);
 });
 
+builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(option =>
 {
     option.IdleTimeout = TimeSpan.FromMinutes(60);

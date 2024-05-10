@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWS.Logger.Core" Version="3.3.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SV20T1080053.DataLayers\SV20T1080053.DataLayers.csproj" />
     <ProjectReference Include="..\SV20T1080053.DomainModels\SV20T1080053.DomainModels.csproj" />
   </ItemGroup>

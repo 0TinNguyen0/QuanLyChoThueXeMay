@@ -1,22 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SV20T1080053.BusinessLayers.Services.Interfaces;
-using SV20T1080053.DataLayers.Repositories.Interfaces;
 
 namespace SV20T1080053.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class EmployeeController : Controller
     {
-        private readonly IUserService _userService;
-
-        public EmployeeController(IUserService userService)
+        public IActionResult Index()
         {
-            _userService = userService;
+            return View();
         }
-
-        public async Task<IActionResult> Index()
+        public IActionResult Create()
         {
-            var users = await _userService.GetUserAsync();
-            return View(User);
+            return View();
+        }
+        public IActionResult Delete()
+        {
+            return View();
         }
     }
 }

@@ -1,19 +1,26 @@
 ﻿using SV20T1080053.DomainModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SV20T1080053.BusinessLayers.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<IEnumerable<User>> GetUserAsync();
+        Task<List<User>> GetAllUsersAsync();
         Task<User> GetUserByIdAsync(int id);
+        Task<Status> CreateUserAsync(User user);
+        Task<Status> UpdateUserAsync(User user);
+        Task<Status> DeleteUserAsync(User user);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         Task<User> GetUserByEmailAsync(string email);
-        Task<User> CreateUserAsync(User user);
-        Task UpdateUserAsync(User user);
-        Task DeleteUserAsync(int userId);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        Task<User> GetUserByUserNameAsync(string name);
     }
 }

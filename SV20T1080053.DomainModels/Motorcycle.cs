@@ -13,12 +13,12 @@ namespace SV20T1080053.DomainModels
     /// </summary>
     /// 
 
-    public enum Brand
-    {
-        Honda,
-        Yamaha,
-        Suzuki,
-    }
+    //public enum Brand
+    //{
+    //    Honda,
+    //    Yamaha,
+    //    Suzuki,
+    //}
 
     public enum Type
     {
@@ -27,14 +27,14 @@ namespace SV20T1080053.DomainModels
     }
 
     [Table("Motorcycles")]
-    public class Motorcycle
+    public class Motorcycle : ISoftDelete
     {
         [Key]
         public int MotorcycleId { get; set; }
 
         [ForeignKey("UserId")]
         public int UserId { get; set; }
-        public Brand Brand { get; set; }
+        public string Brand { get; set; }
         public Type Type { get; set; }
 
         [Required]
@@ -64,5 +64,7 @@ namespace SV20T1080053.DomainModels
 
         //Relationship
         public User User { get; set; }
+        public bool IsDeleted { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DateTime? DeletedAt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

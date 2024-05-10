@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SV20T1080053.DataLayers.EFCore;
 using SV20T1080053.DataLayers.Repositories.Interfaces;
-
+using SV20T1080053.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,30 +18,39 @@ namespace SV20T1080053.DataLayers.Repositories.Implementions
         {
             _context = context;
         }
-
-        public Task<int> CreateAsync(T entity)
+        public async Task<List<T>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().ToListAsync();
         }
 
-        public Task<int> DeleteAsync(T entity)
+        public async Task<T> GetByIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().FindAsync(id);
         }
 
-        public Task<List<T>> GetAllAsync()
+        public async Task<int> CreateAsync(T entity)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Add(entity);
+            await _context.SaveChangesAsync();
+            return entity.GetType().GetProperty("Id")?.GetValue(entity) as int? ?? 0;
         }
 
-        public Task<T> GetByIdAsync(int? id)
+        public async Task<int> UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return entity.GetType().GetProperty("Id")?.GetValue(entity) as int? ?? 0;
         }
 
-        public Task<int> UpdateAsync(T entity)
+        public async Task<int> DeleteAsync(T entity)
         {
-            throw new NotImplementedException();
+            if (entity is ISoftDelete)
+            {
+                ((ISoftDelete)entity).IsDeleted = true;
+            }
+            _context.Entry(entity).State = EntityState.Modified;
+            return await _context.SaveChangesAsync();
         }
+
     }
 }

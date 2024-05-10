@@ -12,14 +12,14 @@ namespace SV20T1080053.DomainModels
     /// thông tin của tài khoản trong SQL 
     /// </summary>
     /// 
-    public enum Roles
+    public enum Roles 
     {
         Employee,
         Customer
     }
 
     [Table("Users")]
-    public class User
+    public class User : ISoftDelete
     {
         [Key]
         public int UserId { get; set; }
@@ -42,15 +42,36 @@ namespace SV20T1080053.DomainModels
 
         [Required]
         [StringLength(50)]
-        public string Photo { get; set; } = string.Empty;
+        public string? Photo { get; set; } = string.Empty;
 
         [Required]
         [StringLength(50)]
         public string Phone { get; set; } = string.Empty;
 
+        [Required]
+        [StringLength(50)]
+        public string Address { get; set; } = string.Empty;
+        public bool IsDeleted { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? DeletedAt { get; set; }
+
         public Roles Role { get; set; }
         //Relationship
         public IEnumerable<Motorcycle> Motorcycles { get; set; }
-        public IEnumerable<Rental> Rentals { get; set;}
+        public IEnumerable<Rental> Rentals { get; set; }
+
+        public string GetRoleName()
+        {
+            switch (Role)
+            {
+                case Roles.Employee:
+                    return "Nhân viên";
+                case Roles.Customer:
+                    return "Khách hàng";
+                default:
+                    return string.Empty;
+            }
+        }
     }
 }

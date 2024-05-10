@@ -18,11 +18,12 @@ namespace SV20T1080053.DomainModels
         Pending,
         InProgress,
         Completed,
-        Cancelled
+        Cancelled,
+        Success
     }
 
     [Table("Rentals")]
-    public class Rental
+    public class Rental : ISoftDelete
     {
         [Key]
         public int RentalId { get; set; }
@@ -49,6 +50,7 @@ namespace SV20T1080053.DomainModels
         public IEnumerable<Invoice> Invoices { get; set; }
         public IEnumerable<Payment> Payments { get; set; }
         public User User { get; set; }
-        
+        public bool IsDeleted { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DateTime? DeletedAt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }
