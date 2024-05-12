@@ -28,7 +28,7 @@ namespace SV20T1080053.BusinessLayers.Services.Implementations
             _userRepository = userRepository;
         }
 
-        public async Task<List<User>> GetAllUsersAsync()
+        public async Task<List<User>>  GetAllUsersAsync()
         {
             try
             {
@@ -74,6 +74,13 @@ namespace SV20T1080053.BusinessLayers.Services.Implementations
         public Task<Status> UpdateUserAsync(User user)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<User> GetUserByEmailAndPasswordAsync(string email, string password)
+        {
+            var users = await _userRepository.GetAllAsync();
+            // Tìm kiếm người dùng với email và mật khẩu tương ứng
+            return users.FirstOrDefault(u => u.Email == email && u.Password == password);
         }
     }    
 }

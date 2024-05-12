@@ -18,6 +18,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/css/login.css">
     <title>Document</title>
+
+    <style>
+        /* CSS cho biểu tượng mắt */
+        .eye-icon {
+            cursor: pointer;
+        }
+
+            /* CSS cho biểu tượng mắt bị che khuất */
+            .eye-icon::before {
+                content: "\f070";
+                font-family: FontAwesome;
+                font-size: 16px;
+                color: #666;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            /* CSS cho biểu tượng mắt được hiển thị */
+            .eye-icon.visible::before {
+                content: "\f06e";
+            }
+    </style>
+
 </head>
 <body>
     <div class="container">
@@ -33,13 +58,17 @@
                         <form action="~/Account/Login" method="post" name="login">
                            <div class="form-group">
                               <label for="exampleInputEmail1">Tên đăng nhập: </label>
-                                <!-- <input type="email" name="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Nhập Email">-->
-                                <input type="text" class="form-control" name="email" placeholder="Email">
+                                <input type="email" name="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Nhập Email">
                            </div>
-                           <div class="form-group">
-                              <label for="exampleInputEmail1">Mật khẩu</label>
-                              <input type="password" name="password" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Nhập Password">
-                           </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Mật khẩu</label>
+                                <div class="input-group">
+                                    <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Nhập Password">
+                                    <span class="input-group-text" id="togglePassword">
+                                        <i class="fa fa-eye" id="eyeIcon"></i>
+                                    </span>
+                                </div>
+                            </div>
                            <div class="col-md-12 text-center ">
                               <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
                            </div>      
@@ -49,5 +78,31 @@
 		</div>
       </div>   
     </div>
+
+    <script>
+        // Thay đổi trạng thái của mật khẩu khi nhấp vào biểu tượng mắt
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+
+            // Sau 2 giây, chuyển đổi lại sang kiểu password và thay đổi biểu tượng mắt
+            setTimeout(function () {
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }, 2000);
+        });
+    </script>
+
 </body>
 </html>

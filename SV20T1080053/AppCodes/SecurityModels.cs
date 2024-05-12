@@ -26,7 +26,7 @@ namespace SV20T1080053
 
                 userData.UserId = principal.FindFirstValue(nameof(userData.UserId));
                 userData.UserName = principal.FindFirstValue(nameof(userData.UserName));
-                userData.DisplayName = principal.FindFirstValue(nameof(userData.DisplayName));
+                userData.FullName = principal.FindFirstValue(nameof(userData.FullName));
                 userData.Email = principal.FindFirstValue(nameof(userData.Email));
                 userData.Photo = principal.FindFirstValue(nameof(userData.Photo));
 
@@ -57,7 +57,7 @@ namespace SV20T1080053
     {
         public string? UserId { get; set; }
         public string? UserName { get; set; }
-        public string? DisplayName { get; set; }
+        public string? FullName { get; set; }
         public string? Email { get; set; }
         public string? Photo { get; set; }
         public string? ClientIP { get; set; }
@@ -77,7 +77,7 @@ namespace SV20T1080053
                 {
                     new Claim(nameof(UserId), UserId ?? ""),
                     new Claim(nameof(UserName), UserName ?? ""),
-                    new Claim(nameof(DisplayName), DisplayName ?? ""),
+                    new Claim(nameof(FullName), FullName ?? ""),
                     new Claim(nameof(Email), Email ?? ""),
                     new Claim(nameof(Photo), Photo ?? ""),
                     new Claim(nameof(ClientIP), ClientIP ?? ""),
@@ -168,7 +168,7 @@ namespace SV20T1080053
         //public const string Administrator = "admin";
 
         [Display(Name = "Nhân viên")]
-        public const string Staff = "staff";
+        public const string Employee = "employee";
 
         [Display(Name = "Khách hàng")]
         public const string Customer = "customer";

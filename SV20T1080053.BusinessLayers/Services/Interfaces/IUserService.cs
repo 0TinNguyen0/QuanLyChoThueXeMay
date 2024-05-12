@@ -9,6 +9,7 @@ namespace SV20T1080053.BusinessLayers.Services.Interfaces
         Task<Status> CreateUserAsync(User user);
         Task<Status> UpdateUserAsync(User user);
         Task<Status> DeleteUserAsync(User user);
+
         /// <summary>
         /// 
         /// </summary>
@@ -22,5 +23,13 @@ namespace SV20T1080053.BusinessLayers.Services.Interfaces
         /// <param name="name"></param>
         /// <returns></returns>
         Task<User> GetUserByUserNameAsync(string name);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        Task<User> GetUserByEmailAndPasswordAsync(string email, string password);
     }
 }
