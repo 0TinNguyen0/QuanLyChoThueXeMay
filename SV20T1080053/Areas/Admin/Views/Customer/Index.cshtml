@@ -4,64 +4,58 @@
     ViewBag.Title = "Danh sách khách hàng";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 
-</head>
-<body>
-
-    <div class="table-responsive">
-        <table class="table .table-bordered table-hover">
-            <thead>
-                <tr class="bg-primary">
-                    <th>STT</th>
-                    <th>Họ Tên</th>
-                    <th>Ngày Sinh</th>
-                    <th>Địa chỉ</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Quyền</th>
-                    <th class="text-right">Chức Năng</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (int i = 0; i < Model.Count; i++)
-                {
-                    var users = Model[i];
-                    <tr>
-                        <td>@(i+1)</td>
-                        <td>@users.FullName</td>
-                        <td>@users.BirthDate</td>
-                        <td>@users.Address</td>
-                        <td>@users.Email</td>
-                        <td>@users.Phone</td>
-                        <td>@users.GetRoleName()</td>
-                        <td class="text-right">
-                            <a href="~/Admin/Customer/Info/@users.UserId" class="btn btn-xs btn-info" title="Thông tin">
-                                <i class="fa fa-plus-square"></i>
-                            </a>
-                            <a href="~/Admin/Customer/Edit/@users.UserId" class="btn btn-xs btn-info" title="Chỉnh sửa">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                            <a href="~/Admin/Customer/ChangePassword?id=@users.UserId" class="btn btn-xs btn-warning" title="Đổi Mật Khẩu">
-                                <i class="fa fa-key"></i>
-                            </a>
-                            <a href="~/Admin/Customer/Delete?id=@users.UserId" class="btn btn-xs btn-danger" title="Xóa">
-                            <i class="fa fa-remove"></i>
-                            </a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+            <a href="~/Admin/Customer/Create" class="btn btn-primary btn-sm  navbar-btn">
+                <i class="fa fa-user-plus"></i> Thêm khách hàng
+            </a>
+            </li>
+        </ul>
     </div>
-</body>
-</html>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr class="bg-primary">
+                <th>STT</th>
+                <th>Họ Tên</th>
+                <th>Ngày Sinh</th>
+                <th>Địa chỉ</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Vai trò</th>
+                <th class="text-right">Chức Năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model.Where(u => u.Role == SV20T1080053.DomainModels.Roles.Customer))
+            {
+                <tr>
+                    <td>@(Model.Where(u => u.Role == SV20T1080053.DomainModels.Roles.Customer).ToList().IndexOf(customer) + 1)</td>
+                    <td>@customer.FullName</td>
+                    <td>@customer.BirthDate</td>
+                    <td>@customer.Address</td>
+                    <td>@customer.Email</td>
+                    <td>@customer.Phone</td>
+                    <td>@customer.GetRoleName()</td>
+                    <td class="text-right">
+                        <a href="~/Admin/Customer/Info/@customer.UserId" class="btn btn-xs btn-info" title="Thông tin">
+                            <i class="fa fa-plus-square"></i>
+                        </a>
+                        <a href="~/Admin/Customer/Edit/@customer.UserId" class="btn btn-xs btn-info" title="Chỉnh sửa">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a href="~/Admin/Customer/ChangePassword?id=@customer.UserId" class="btn btn-xs btn-warning" title="Đổi Mật Khẩu">
+                            <i class="fa fa-key"></i>
+                        </a>
+                        <a href="~/Admin/Customer/Delete?id=@customer.UserId" class="btn btn-xs btn-danger" title="Xóa">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

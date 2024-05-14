@@ -1,90 +1,51 @@
-﻿@{
+﻿@model List<SV20T1080053.DomainModels.User>
+
+@{
     ViewBag.Title = "Danh sách nhân viên";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
-
-    <div class="table-responsive">
-        <table class="table .table-bordered table-hover">
-            <thead>
-                <tr class="bg-primary">
-                    <th>Họ Tên</th>
-                    <th>Ngày Sinh</th>
-                    <th>Địa chỉ</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr class="bg-primary">
+                <th>STT</th>
+                <th>Họ Tên</th>
+                <th>Ngày Sinh</th>
+                <th>Địa chỉ</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Vai trò</th>
+                <th class="text-right">Chức Năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model.Where(u => u.Role == SV20T1080053.DomainModels.Roles.Employee))
+            {
                 <tr>
-                    <td>Nguyễn Quốc Trung</td>
-                    <td>25/09/2002</td>
-                    <td>Thừa Thiên Huế</td>
-                    <td>trung@gmail.com</td>
-                    <td>09090909090</td>
+                    <td>@(Model.Where(u => u.Role == SV20T1080053.DomainModels.Roles.Employee).ToList().IndexOf(employee) + 1)</td>
+                    <td>@employee.FullName</td>
+                    <td>@employee.BirthDate</td>
+                    <td>@employee.Address</td>
+                    <td>@employee.Email</td>
+                    <td>@employee.Phone</td>
+                    <td>@employee.GetRoleName()</td>
                     <td class="text-right">
-                        <a href="~/Admin/Customer/Edit" class="btn btn-xs btn-info">
+                        <a href="~/Admin/Customer/Info/@employee.UserId" class="btn btn-xs btn-info" title="Thông tin">
+                            <i class="fa fa-plus-square"></i>
+                        </a>
+                        <a href="~/Admin/Customer/Edit/@employee.UserId" class="btn btn-xs btn-info" title="Chỉnh sửa">
                             <i class="fa fa-edit"></i>
                         </a>
-                        <a href="~/Admin/Customer/ChangePassword" class="btn btn-xs btn-warning">
+                        <a href="~/Admin/Customer/ChangePassword?id=@employee.UserId" class="btn btn-xs btn-warning" title="Đổi Mật Khẩu">
                             <i class="fa fa-key"></i>
                         </a>
-                        <a href="~/Admin/Customer/Delete" class="btn btn-xs btn-danger">
+                        <a href="~/Admin/Customer/Delete?id=@employee.UserId" class="btn btn-xs btn-danger" title="Xóa">
                             <i class="fa fa-remove"></i>
                         </a>
                     </td>
                 </tr>
-                <tr>
-                    <td>Phan Trọng Quỳnh</td>
-                    <td>12/1/2001</td>
-                    <td>Thừa Thiên Huế</td>
-                    <td>trongquynh@gmail.com</td>
-                    <td>09090909090</td>
-                    <td class="text-right">
-                        <a href="~/Admin/Customer/Edit" class="btn btn-xs btn-info">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <a href="~/Admin/Customer/ChangePassword" class="btn btn-xs btn-warning">
-                            <i class="fa fa-key"></i>
-                        </a>
-                        <a href="~/Admin/Customer/Delete" class="btn btn-xs btn-danger">
-                            <i class="fa fa-remove"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Thiên Thai</td>
-                    <td>11/5/2000</td>
-                    <td>Thừa Thiên Huế</td>
-                    <td>thai@gmail.com</td>
-                    <td>09090909090</td>
-                    <td class="text-right">
-                        <a href="~/Admin/Customer/Edit" class="btn btn-xs btn-info">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <a href="~/Admin/Customer/ChangePassword" class="btn btn-xs btn-warning">
-                            <i class="fa fa-key"></i>
-                        </a>
-                        <a href="~/Admin/Customer/Delete" class="btn btn-xs btn-danger">
-                            <i class="fa fa-remove"></i>
-                        </a>
-            </tbody>
-        </table>
-    </div>                </td>
-    </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-
-
-</body>
-</html>

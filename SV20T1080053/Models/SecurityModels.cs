@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Security.Claims;
 
-namespace SV20T1080053
+namespace SV20T1080053.Models
 {
     /// <summary>
     /// Extension các phương thức cho các đối tượng liên quan đến xác thực tài khoản người dùng

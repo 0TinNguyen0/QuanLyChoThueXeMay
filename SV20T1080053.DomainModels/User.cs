@@ -30,7 +30,7 @@ namespace SV20T1080053.DomainModels
 
         [Required]
         [DataType(DataType.DateTime)]
-        public string BirthDate { get; set; } = string.Empty;
+        public DateTime BirthDate { get; set; } 
 
         [Required]
         [DataType(DataType.Password)]

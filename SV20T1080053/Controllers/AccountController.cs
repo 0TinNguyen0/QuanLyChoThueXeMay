@@ -5,6 +5,7 @@ using SV20T1080053.BusinessLayers;
 using SV20T1080053.BusinessLayers.Services.Implementations;
 using SV20T1080053.BusinessLayers.Services.Interfaces;
 using SV20T1080053.DomainModels;
+using SV20T1080053.Models;
 
 namespace SV20T1080053.Controllers
 {
@@ -84,6 +85,8 @@ namespace SV20T1080053.Controllers
             ModelState.AddModelError("Error", "Đăng nhập không thành công");
             return View();
         }
+
+
 
         [HttpGet]
         public async Task<IActionResult> Logout()

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SV20T1080053.BusinessLayers.Services.Interfaces;
+using SV20T1080053.DomainModels;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SV20T1080053.Areas.Admin.Controllers
@@ -30,10 +31,26 @@ namespace SV20T1080053.Areas.Admin.Controllers
             }
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create(User user)
         {
-            return View();
-        }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Thêm khách hàng vào cơ sở dữ liệu
+                    user.Role = Roles.Customer; // Đảm bảo vai trò là khách hàng
+                    await _userService.CreateUserAsync(user);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, $"Error: {ex.Message}");
+                    ModelState.AddModelError(string.Empty, "Error creating customer. Please try again."); // Thêm thông báo lỗi vào ModelState
+                    return View(user);
+                }
+            }
+            return View(user);
+        }   
 
         public IActionResult Edit()
         {

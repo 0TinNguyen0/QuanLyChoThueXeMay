@@ -63,9 +63,9 @@
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Mật khẩu</label>
                                 <div class="input-group">
-                                    <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Nhập Password">
+                                    <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Nhập Mật Khẩu">
                                     <span class="input-group-text" id="togglePassword">
-                                        <i class="fa fa-eye" id="eyeIcon"></i>
+                                        <i class="fa fa-eye-slash" id="eyeIcon"></i>
                                     </span>
                                 </div>
                             </div>
@@ -86,20 +86,20 @@
             const eyeIcon = document.getElementById('eyeIcon');
 
             if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                eyeIcon.classList.remove('fa-eye');
-                eyeIcon.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
+                passwordInput.type = 'text';             
                 eyeIcon.classList.remove('fa-eye-slash');
                 eyeIcon.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
             }
 
             // Sau 2 giây, chuyển đổi lại sang kiểu password và thay đổi biểu tượng mắt
             setTimeout(function () {
                 passwordInput.type = 'password';
-                eyeIcon.classList.remove('fa-eye-slash');
-                eyeIcon.classList.add('fa-eye');
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
             }, 2000);
         });
     </script>
