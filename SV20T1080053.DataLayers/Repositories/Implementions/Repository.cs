@@ -44,11 +44,7 @@ namespace SV20T1080053.DataLayers.Repositories.Implementions
 
         public async Task<int> DeleteAsync(T entity)
         {
-            if (entity is ISoftDelete)
-            {
-                ((ISoftDelete)entity).IsDeleted = true;
-            }
-            _context.Entry(entity).State = EntityState.Modified;
+            _context.Set<T>().Remove(entity);
             return await _context.SaveChangesAsync();
         }
 

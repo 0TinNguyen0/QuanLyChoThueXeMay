@@ -40,9 +40,48 @@ namespace SV20T1080053.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete(int id)
         {
-            return View();
+            try
+            {
+                var userToDelete = await _userService.GetUserByIdAsync(id);
+                if (userToDelete == null)
+                {
+                    return NotFound(new { success = false, message = "User not found" });
+                }
+
+                await _userService.DeleteUserAsync(userToDelete);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex.Message}");
+                return StatusCode(500, new { success = false, message = "Internal server error" });
+            }
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ConfirmDelete(int id)
+        {
+            try
+            {
+                var userToDelete = await _userService.GetUserByIdAsync(id);
+                if (userToDelete == null)
+                {
+                    return NotFound();
+                }
+
+                await _userService.DeleteUserAsync(userToDelete);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
     }
 }

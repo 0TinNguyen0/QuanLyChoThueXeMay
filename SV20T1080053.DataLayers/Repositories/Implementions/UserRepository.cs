@@ -21,5 +21,10 @@ namespace SV20T1080053.DataLayers.Repositories.Implementions
         {
             throw new NotImplementedException();
         }
+
+        public async Task<User> GetByIdAsync(int id)
+        {
+            return await _context.Users.FindAsync(id);
+        }
     }
 }

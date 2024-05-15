@@ -6,9 +6,9 @@ namespace SV20T1080053.BusinessLayers.Services.Interfaces
     {
         Task<List<User>> GetAllUsersAsync();
         Task<User> GetUserByIdAsync(int id);
-        Task<Status> CreateUserAsync(User user);
-        Task<Status> UpdateUserAsync(User user);
-        Task<Status> DeleteUserAsync(User user);
+        Task<User> CreateUserAsync(User user);
+        Task<User> UpdateUserAsync(User user);
+        Task<User> DeleteUserAsync(User user);
 
         /// <summary>
         /// 

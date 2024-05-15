@@ -46,14 +46,30 @@ namespace SV20T1080053.BusinessLayers.Services.Implementations
             }
         }
 
-        public Task<Status> CreateUserAsync(User user)
+        public Task<User> CreateUserAsync(User user)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Status> DeleteUserAsync(User user)
+        public async Task<User> DeleteUserAsync(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (user == null)
+                {
+                    throw new ArgumentNullException(nameof(user), "Error");
+                }
+
+                // Xóa  khỏi cơ sở dữ liệu
+                await _userRepository.DeleteAsync(user);
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Lỗi khi xóa: {ex.Message}");
+                throw;
+            }
         }
 
         public Task<User> GetUserByEmailAsync(string email)
@@ -61,9 +77,23 @@ namespace SV20T1080053.BusinessLayers.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public Task<User> GetUserByIdAsync(int id)
+        public async Task<User> GetUserByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Giả sử userRepository có phương thức để lấy người dùng theo ID
+                var user = await _userRepository.GetByIdAsync(id);
+                if (user == null)
+                {
+                    throw new KeyNotFoundException($"Không tìm thấy người dùng với ID {id}.");
+                }
+                return user;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Lỗi xảy ra khi lấy người dùng theo ID: {ex.Message}");
+                throw;
+            }
         }
 
         public Task<User> GetUserByUserNameAsync(string name)
@@ -71,7 +101,7 @@ namespace SV20T1080053.BusinessLayers.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public Task<Status> UpdateUserAsync(User user)
+        public Task<User> UpdateUserAsync(User user)
         {
             throw new NotImplementedException();
         }
