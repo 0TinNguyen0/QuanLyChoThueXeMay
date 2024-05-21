@@ -22,41 +22,22 @@ namespace SV20T1080053.DataLayers.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SV20T1080053.DomainModels.Invoice", b =>
+            modelBuilder.Entity("SV20T1080053.DomainModels.Brand", b =>
                 {
-                    b.Property<int>("InvoiceId")
+                    b.Property<int>("BrandId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BrandId"));
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("InvoiceDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("RentalId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("TotalAmount")
+                    b.Property<string>("BrandName")
+                        .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("InvoiceId");
+                    b.HasKey("BrandId");
 
-                    b.HasIndex("RentalId");
-
-                    b.ToTable("Invoices");
+                    b.ToTable("Brands");
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.Motorcycle", b =>
@@ -67,53 +48,104 @@ namespace SV20T1080053.DataLayers.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MotorcycleId"));
 
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Color")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                    b.Property<string>("MotorcycleName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Photo")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<decimal>("Rental_Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<DateTime>("ReleaseYear")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
+                    b.HasKey("MotorcycleId");
+
+                    b.HasIndex("BrandId");
+
+                    b.ToTable("Motorcycles", (string)null);
+                });
+
+            modelBuilder.Entity("SV20T1080053.DomainModels.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PaymentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Year")
-                        .HasColumnType("datetime2");
+                    b.HasKey("OrderId");
 
-                    b.HasKey("MotorcycleId");
+                    b.HasIndex("PaymentId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Motorcycles");
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("SV20T1080053.DomainModels.OrderDetail", b =>
+                {
+                    b.Property<int>("OrderDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderDetailId"));
+
+                    b.Property<int>("MotorcycleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderDetailId");
+
+                    b.HasIndex("MotorcycleId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.Payment", b =>
@@ -124,71 +156,26 @@ namespace SV20T1080053.DataLayers.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"));
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("MethodName")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Money")
+                    b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("PaymentName")
+                        .HasColumnType("int");
+
                     b.Property<int>("PaymentStatus")
                         .HasColumnType("int");
-
-                    b.Property<int>("RentalId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PaymentId");
-
-                    b.HasIndex("RentalId");
-
-                    b.ToTable("Payments");
-                });
-
-            modelBuilder.Entity("SV20T1080053.DomainModels.Rental", b =>
-                {
-                    b.Property<int>("RentalId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RentalId"));
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("MotorcycleId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("RentalId");
+                    b.HasKey("PaymentId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Rentals");
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.User", b =>
@@ -207,9 +194,6 @@ namespace SV20T1080053.DataLayers.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -219,13 +203,10 @@ namespace SV20T1080053.DataLayers.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -242,46 +223,62 @@ namespace SV20T1080053.DataLayers.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("SV20T1080053.DomainModels.Invoice", b =>
-                {
-                    b.HasOne("SV20T1080053.DomainModels.Rental", "Rental")
-                        .WithMany("Invoices")
-                        .HasForeignKey("RentalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Rental");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.Motorcycle", b =>
                 {
-                    b.HasOne("SV20T1080053.DomainModels.User", "User")
+                    b.HasOne("SV20T1080053.DomainModels.Brand", "Brand")
                         .WithMany("Motorcycles")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Brand");
+                });
+
+            modelBuilder.Entity("SV20T1080053.DomainModels.Order", b =>
+                {
+                    b.HasOne("SV20T1080053.DomainModels.Payment", "Payment")
+                        .WithMany("Orders")
+                        .HasForeignKey("PaymentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SV20T1080053.DomainModels.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Payment");
+
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SV20T1080053.DomainModels.OrderDetail", b =>
+                {
+                    b.HasOne("SV20T1080053.DomainModels.Motorcycle", "Motorcycle")
+                        .WithMany("OrderDetail")
+                        .HasForeignKey("MotorcycleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SV20T1080053.DomainModels.Order", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Motorcycle");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.Payment", b =>
                 {
-                    b.HasOne("SV20T1080053.DomainModels.Rental", "Rental")
-                        .WithMany("Payments")
-                        .HasForeignKey("RentalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Rental");
-                });
-
-            modelBuilder.Entity("SV20T1080053.DomainModels.Rental", b =>
-                {
                     b.HasOne("SV20T1080053.DomainModels.User", "User")
-                        .WithMany("Rentals")
+                        .WithMany("Payments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -289,18 +286,31 @@ namespace SV20T1080053.DataLayers.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SV20T1080053.DomainModels.Rental", b =>
+            modelBuilder.Entity("SV20T1080053.DomainModels.Brand", b =>
                 {
-                    b.Navigation("Invoices");
+                    b.Navigation("Motorcycles");
+                });
 
-                    b.Navigation("Payments");
+            modelBuilder.Entity("SV20T1080053.DomainModels.Motorcycle", b =>
+                {
+                    b.Navigation("OrderDetail");
+                });
+
+            modelBuilder.Entity("SV20T1080053.DomainModels.Order", b =>
+                {
+                    b.Navigation("OrderDetails");
+                });
+
+            modelBuilder.Entity("SV20T1080053.DomainModels.Payment", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("SV20T1080053.DomainModels.User", b =>
                 {
-                    b.Navigation("Motorcycles");
+                    b.Navigation("Orders");
 
-                    b.Navigation("Rentals");
+                    b.Navigation("Payments");
                 });
 #pragma warning restore 612, 618
         }

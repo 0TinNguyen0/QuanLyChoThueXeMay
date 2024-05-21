@@ -46,9 +46,38 @@ namespace SV20T1080053.BusinessLayers.Services.Implementations
             }
         }
 
-        public Task<User> CreateUserAsync(User user)
+        public async Task<User?> CreateUserAsync(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Kiểm tra xem user có null hay không
+                if (user == null)
+                {
+                    throw new ArgumentNullException(nameof(user), "User object is null");
+                }
+
+                // Kiểm tra email đã tồn tại chưa
+                bool emailExists = await _userRepository.ExistsByEmailAsync(user.Email);
+                if (emailExists)
+                {
+                    return null; // Trả về null nếu email đã tồn tại
+                }
+
+                // Mã hóa mật khẩu
+                user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+
+
+                // Gọi phương thức từ repository để thêm user mới vào cơ sở dữ liệu
+                await _userRepository.CreateAsync(user);
+
+                // Trả về user đã được thêm vào cơ sở dữ liệu
+                return user;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error: {ex.Message}");
+                throw;
+            }
         }
 
         public async Task<User> DeleteUserAsync(User user)
@@ -108,9 +137,54 @@ namespace SV20T1080053.BusinessLayers.Services.Implementations
 
         public async Task<User> GetUserByEmailAndPasswordAsync(string email, string password)
         {
-            var users = await _userRepository.GetAllAsync();
-            // Tìm kiếm người dùng với email và mật khẩu tương ứng
-            return users.FirstOrDefault(u => u.Email == email && u.Password == password);
+            var user = await _userRepository.GetByEmailAsync(email);
+
+            if (user != null && BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
+            {
+                return user;
+            }
+
+            return null;
         }
-    }    
+
+        public async Task<int> GetEmployeeCountAsync()
+        {
+            try
+            {
+                // Sử dụng Entity Framework Core để truy vấn cơ sở dữ liệu và lấy số lượng nhân viên
+                var employeeCount = await _userRepository.GetEmployeeCountAsync();
+                return employeeCount;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Lỗi xảy ra khi lấy số lượng nhân viên: {ex.Message}");
+                throw;
+            }
+        }
+
+        public async Task<int> GetCustomerCountAsync()
+        {
+            try
+            {
+                // Sử dụng Entity Framework Core để truy vấn cơ sở dữ liệu và lấy số lượng khách hàng
+                var customerCount = await _userRepository.GetCustomerCountAsync();
+                return customerCount;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Lỗi xảy ra khi lấy số lượng khách hàng: {ex.Message}");
+                throw;
+            }
+        }
+
+        Task<dynamic> IUserService.GetEmployeeCountAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<dynamic> IUserService.GetCustomerCountAsync()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -14,40 +14,56 @@ namespace SV20T1080053.DomainModels
     /// 
     public enum PaymentStatus
     {
-        COMPLETED,
-        FAILED,
-        CANCELED,
+        Pending,
+        Completed,
+        Failed,
+        Canceled,
     }
-    public enum MethodName
+    public enum PaymentName
     {
         CashPayment,
         BankTransfer,
-        Credit,
     }
 
     [Table("Payments")]
-    public class Payment : ISoftDelete
+    public class Payment 
     {
         [Key]
         public int PaymentId { get; set; }
 
-        [ForeignKey("RentalId")]
-        public int RentalId { get; set; }
-
+        [ForeignKey("UserId")]
+        public int UserId { get; set; }
+        public PaymentName PaymentName { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal Money { get; set; }
+        public decimal Amount { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime PaymentDate { get; set;} = DateTime.Now;
         public PaymentStatus PaymentStatus { get; set; }
-        public MethodName MethodName { get; set; }
+        
 
         //Relationship
-        public Rental Rental { get; set; }
-        public bool IsDeleted { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime? DeletedAt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IEnumerable<Order> Orders { get; set; }
+        public User User { get; set; }
+
+        public string GetPaymentStatus()
+        {
+            switch (PaymentStatus)
+            {
+                case PaymentStatus.Pending:
+                    return "Đang xử lý";
+                case PaymentStatus.Completed:
+                    return "Hoàn thành";
+                case PaymentStatus.Failed:
+                    return "Thất bại";
+                case PaymentStatus.Canceled:
+                    return "Đã hủy";
+                default:
+                    return string.Empty;
+            }
+        }
     }
 }

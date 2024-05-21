@@ -18,9 +18,16 @@ builder.Services.AddDbContext<ApplicationDBContext>(
 );
 
 builder.Services.AddScoped<ILogger<UserService>, Logger<UserService>>();
-
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<ILogger<MotorcycleService>, Logger<MotorcycleService>>();
+builder.Services.AddTransient<IMotorcycleService, MotorcycleService>();
+builder.Services.AddTransient<IMotorcycleRepository, MotorcycleRepository>();
+
+builder.Services.AddScoped<ILogger<BrandService>, Logger<BrandService>>();
+builder.Services.AddTransient<IBrandService, BrandService>();
+builder.Services.AddTransient<IBrandRepository, BrandRepository>();
 // B? sung các service c?n dùng:
 
 builder.Services.AddHttpContextAccessor();

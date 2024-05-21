@@ -41,5 +41,10 @@ namespace SV20T1080053.DataLayers.Repositories.Interfaces
         /// <param name="entity"></param>
         /// <returns></returns>
         Task<int> DeleteAsync(T entity);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
     }
 }

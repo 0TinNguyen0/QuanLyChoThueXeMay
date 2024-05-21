@@ -29,8 +29,8 @@
 <div class="container-fluid">
     <ul class="nav navbar-nav navbar-right">
         <li>
-            <a href="~/Admin/Employee/Create" class="btn btn-primary btn-sm  navbar-btn">
-                <i class="fa fa-user-plus"></i> Thêm nhân viên
+            <a style="padding:10px; font-size: 14px; font-weight: 200;" href="~/Admin/Employee/Create" class="btn btn-primary btn-sm  navbar-btn">
+                <i class="fa fa-plus"></i> Thêm nhân viên
             </a>
         </li>
     </ul>
@@ -56,7 +56,7 @@
                 <tr id="user-@employee.UserId">
                     <td>@(Model.Where(u => u.Role == SV20T1080053.DomainModels.Roles.Employee).ToList().IndexOf(employee) + 1)</td>
                     <td>@employee.FullName</td>
-                    <td>@employee.BirthDate</td>
+                    <td>@string.Format("{0:dd/MM/yyyy}", employee.BirthDate)</td>
                     <td>@employee.Address</td>
                     <td>@employee.Email</td>
                     <td>@employee.Phone</td>

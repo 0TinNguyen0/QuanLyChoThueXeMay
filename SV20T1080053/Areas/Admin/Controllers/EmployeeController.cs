@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SV20T1080053.Areas.Admin.Models;
 using SV20T1080053.BusinessLayers.Services.Interfaces;
+using SV20T1080053.DomainModels;
+using System.Globalization;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SV20T1080053.Areas.Admin.Controllers
@@ -30,15 +33,62 @@ namespace SV20T1080053.Areas.Admin.Controllers
             }
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            var data = new SaveUserViewModel
+            {
+                UserId = 0,
+            };
+            return View(data);
         }
 
         public IActionResult Edit()
         {
             return View();
         }
+
+        /// <summary>
+        /// Mục đích của hàm này để nhận dữ liệu từ client về server
+        /// giành cho chức năng tạo vào sửa
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> Save(SaveUserViewModel viewModel)
+        {
+            // kiểm tra điều kiện
+            if (!ModelState.IsValid)
+            {
+                return View("Create", viewModel);
+            }
+
+            // thêm nếu như userId = 0
+            if (viewModel.UserId == 0)
+            {
+                var birthDate = DateTime.ParseExact(viewModel.BirthDate!, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                var newUser = await _userService.CreateUserAsync(new User
+                {
+                    FullName = viewModel.FullName!,
+                    BirthDate = birthDate,
+                    Address = viewModel.Address!,
+                    Email = viewModel.Email!,
+                    PasswordHash = viewModel.Password!,
+                    Phone = viewModel.Phone!,
+                    Role = Roles.Employee,
+                });
+
+                if (newUser == null) // Nếu email đã tồn tại
+                {
+                    ModelState.AddModelError("Email", "Email đã có người sữ dụng");
+                    return View("Create", viewModel);
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
 
         public async Task<IActionResult> Delete(int id)
         {
@@ -61,27 +111,27 @@ namespace SV20T1080053.Areas.Admin.Controllers
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> ConfirmDelete(int id)
-        {
-            try
-            {
-                var userToDelete = await _userService.GetUserByIdAsync(id);
-                if (userToDelete == null)
-                {
-                    return NotFound();
-                }
+        //[HttpPost]
+        //public async Task<IActionResult> ConfirmDelete(int id)
+        //{
+        //    try
+        //    {
+        //        var userToDelete = await _userService.GetUserByIdAsync(id);
+        //        if (userToDelete == null)
+        //        {
+        //            return NotFound();
+        //        }
 
-                await _userService.DeleteUserAsync(userToDelete);
+        //        await _userService.DeleteUserAsync(userToDelete);
 
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError($"Error: {ex.Message}");
+        //        return StatusCode(500, "Internal server error");
+        //    }
+        //}
 
     }
 }

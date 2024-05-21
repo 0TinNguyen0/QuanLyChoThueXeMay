@@ -6108,6 +6108,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -6121,6 +6122,11 @@
     <ProjectReference Include="..\SV20T1080053.BusinessLayers\SV20T1080053.BusinessLayers.csproj" />
     <ProjectReference Include="..\SV20T1080053.DataLayers\SV20T1080053.DataLayers.csproj" />
     <ProjectReference Include="..\SV20T1080053.DomainModels\SV20T1080053.DomainModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\Motorcycles\" />
+    <Folder Include="wwwroot\img\Users\" />
   </ItemGroup>
 
 </Project>

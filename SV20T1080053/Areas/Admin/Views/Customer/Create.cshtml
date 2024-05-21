@@ -1,4 +1,44 @@
-﻿
+﻿@model SV20T1080053.Areas.Admin.Models.SaveUserViewModel
 @{
     ViewBag.Title = "Thêm khách hàng";
 }
+
+<form action="~/Admin/Customer/Save" method="post">
+    <input type="hidden" name="UserId" value="@Model.UserId" />
+    <div class="form-group">
+        <label for="fullName">Họ tên:</label>
+        <input type="text" class="form-control" id="fullName" name="FullName" value="@Model.FullName">
+        @Html.ValidationMessageFor(m => m.FullName, "", new {style = "color: red;"})
+    </div>
+    <div class="form-group">
+        <label for="birthDate">Ngày sinh:</label>
+        <input type="date" class="form-control" id="birthDate" name="BirthDate" value="@Model.BirthDate" >
+        @Html.ValidationMessageFor(m => m.BirthDate, "", new {style = "color: red;"})
+    </div>
+    <div class="form-group">
+        <label for="address">Địa chỉ:</label>
+        <input type="text" class="form-control" id="address" name="Address" value="@Model.Address">
+        @Html.ValidationMessageFor(m => m.Address, "", new {style = "color: red;"})
+    </div>
+    <div class="form-group">
+        <label for="phone">Số điện thoại:</label>
+        <input type="tel" class="form-control" id="phone" name="Phone" value="@Model.Phone">
+        @Html.ValidationMessageFor(m => m.Phone, "", new {style = "color: red;"})
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" name="Email" value="@Model.Email">
+        @Html.ValidationMessageFor(m => m.Email, "", new {style = "color: red;"})
+    </div>
+    <div class="form-group">
+        <label for="password">Mật khẩu:</label>
+        <input type="password" class="form-control" id="password" name="Password" value="">
+        @Html.ValidationMessageFor(m => m.Password, "", new { style = "color: red;" })
+    </div>
+    <button type="submit" class="btn btn-primary">Thêm mới</button>
+</form>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+

@@ -9,6 +9,7 @@ namespace SV20T1080053.DataLayers.Repositories.Interfaces
 {
     public interface IMotorcycleRepository : IRepository<Motorcycle>
     {
-
+        Task<Motorcycle> GetMotorcycleAllAsync(Motorcycle motorcycle);
+        Task<Motorcycle> GetByIdAsync(int id);
     }
 }

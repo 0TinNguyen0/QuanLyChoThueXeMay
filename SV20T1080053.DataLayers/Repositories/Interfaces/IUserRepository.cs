@@ -11,5 +11,9 @@ namespace SV20T1080053.DataLayers.Repositories.Interfaces
     {
         Task<User> GetUserAllAsync(User user);
         Task<User> GetByIdAsync(int id);
+        Task<bool> ExistsByEmailAsync(string email);
+        Task<User> GetByEmailAsync(string email);
+        Task<int> GetEmployeeCountAsync();
+        Task<int> GetCustomerCountAsync();
     }
 }

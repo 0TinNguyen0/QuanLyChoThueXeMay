@@ -19,7 +19,7 @@ namespace SV20T1080053.DomainModels
     }
 
     [Table("Users")]
-    public class User : ISoftDelete
+    public class User 
     {
         [Key]
         public int UserId { get; set; }
@@ -30,19 +30,18 @@ namespace SV20T1080053.DomainModels
 
         [Required]
         [DataType(DataType.DateTime)]
-        public DateTime BirthDate { get; set; } 
+        public DateTime BirthDate { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
-        [MaxLength(50)]
-        public string Password { get; set; } = string.Empty;
+        [StringLength(256)] // Increase length to accommodate hashed passwords
+        public string PasswordHash { get; set; } = string.Empty;
 
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; } = string.Empty;
 
         [Required]
         [StringLength(50)]
-        public string? Photo { get; set; } = string.Empty;
+        public string Photo { get; set; } = string.Empty;
 
         [Required]
         [StringLength(50)]
@@ -51,16 +50,13 @@ namespace SV20T1080053.DomainModels
         [Required]
         [StringLength(50)]
         public string Address { get; set; } = string.Empty;
-        public bool IsDeleted { get; set; }
-
-        [DataType(DataType.DateTime)]
-        public DateTime? DeletedAt { get; set; }
 
         public Roles Role { get; set; }
-        //Relationship
-        public IEnumerable<Motorcycle> Motorcycles { get; set; }
-        public IEnumerable<Rental> Rentals { get; set; }
 
+        //Relationship
+
+        public IEnumerable<Order> Orders { get; set; }
+        public IEnumerable<Payment> Payments { get; set; }
         public string GetRoleName()
         {
             switch (Role)

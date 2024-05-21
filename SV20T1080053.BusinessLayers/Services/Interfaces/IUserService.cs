@@ -31,5 +31,7 @@ namespace SV20T1080053.BusinessLayers.Services.Interfaces
         /// <param name="password"></param>
         /// <returns></returns>
         Task<User> GetUserByEmailAndPasswordAsync(string email, string password);
+        Task<dynamic> GetEmployeeCountAsync();
+        Task<dynamic> GetCustomerCountAsync();
     }
 }
