@@ -1,5 +1,4 @@
-﻿
-@model SV20T1080053.Areas.Admin.Models.SaveMotorcycleViewModel
+﻿@model SV20T1080053.Areas.Admin.Models.SaveMotorcycleViewModel
 @{
     ViewBag.Title = "Thêm xe máy";
 }
@@ -7,34 +6,49 @@
 <form action="~/Admin/Motorcycle/Save" method="post">
     <input type="hidden" name="MotorcycleId" value="@Model.MotorcycleId" />
     <div class="form-group">
-        <label for="fullName">Tên xe:</label>
-        <input type="text" class="form-control" id="fullName" name="FullName" value="@Model.MotocycleName">
-        @Html.ValidationMessageFor(m => m.MotocycleName, "", new {style = "color: red;"})
+        <label for="MotocycleName">Tên xe:</label>
+        <input type="text" class="form-control" id="MotocycleName" name="MotocycleName" value="@Model.MotocycleName">
+        @Html.ValidationMessageFor(m => m.MotocycleName, "", new { style = "color: red;" })
     </div>
     <div class="form-group">
-        <label for="address">Hãng xe:</label>
-        <input type="text" class="form-control" id="address" name="Address" value="@Model.Brand.BrandName">
-        @Html.ValidationMessageFor(m => m.Address, "", new {style = "color: red;"})
+        <label for="BrandId">Hãng xe:</label>
+        @Html.DropDownListFor(m => m.BrandId, new SelectList(Model.Brands, "BrandId", "BrandName"), "Chọn hãng xe", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.BrandId, "", new { style = "color: red;" })
     </div>
     <div class="form-group">
-        <label for="birthDate">Năm sản xuất:</label>
+        <label for="ReleaseYear">Năm sản xuất:</label>
         <input type="date" class="form-control" id="ReleaseYear" name="ReleaseYear" value="@Model.ReleaseYear">
-        @Html.ValidationMessageFor(m => m.ReleaseYear, "", new {style = "color: red;"})
+        @Html.ValidationMessageFor(m => m.ReleaseYear, "", new { style = "color: red;" })
     </div>
     <div class="form-group">
-        <label for="phone">Số điện thoại:</label>
-        <input type="tel" class="form-control" id="phone" name="Phone" value="@Model.Phone">
-        @Html.ValidationMessageFor(m => m.Phone, "", new {style = "color: red;"})
+        <label for="Type">Loại xe:</label>
+        @Html.DropDownListFor(m => m.Type, new SelectList(Enum.GetValues(typeof(SV20T1080053.DomainModels.Type))), "Chọn loại xe", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Type, "", new { style = "color: red;" })
     </div>
     <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" name="Email" value="@Model.Email">
-        @Html.ValidationMessageFor(m => m.Email, "", new {style = "color: red;"})
+        <label for="Color">Màu:</label>
+        <input type="text" class="form-control" id="Color" name="Color" value="@Model.Color">
+        @Html.ValidationMessageFor(m => m.Color, "", new { style = "color: red;" })
     </div>
     <div class="form-group">
-        <label for="password">Mật khẩu:</label>
-        <input type="password" class="form-control" id="password" name="Password" value="">
-        @Html.ValidationMessageFor(m => m.Password, "", new { style = "color: red;" })
+        <label for="Amount">Giá thuê:</label>
+        <input type="text" class="form-control" id="Amount" name="Amount" value="@Model.Amount">
+        @Html.ValidationMessageFor(m => m.Amount, "", new { style = "color: red;" })
+    </div>
+    <div class="form-group">
+        <label for="StatusName">Trạng thái:</label>
+        @Html.DropDownListFor(m => m.StatusName, new SelectList(Enum.GetValues(typeof(SV20T1080053.DomainModels.StatusName))), "Chọn trạng thái", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.StatusName, "", new { style = "color: red;" })
+    </div>
+    <div class="form-group">
+        <label for="Description">Mô tả:</label>
+        <textarea class="form-control" id="Description" name="Description">@Model.Description</textarea>
+        @Html.ValidationMessageFor(m => m.Description, "", new { style = "color: red;" })
+    </div>
+    <div class="form-group">
+        <label for="Photo">Ảnh xe:</label>
+        <input type="text" class="form-control" id="Photo" name="Photo" value="@Model.Photo">
+        @Html.ValidationMessageFor(m => m.Photo, "", new { style = "color: red;" })
     </div>
     <button type="submit" class="btn btn-primary">Thêm mới</button>
 </form>

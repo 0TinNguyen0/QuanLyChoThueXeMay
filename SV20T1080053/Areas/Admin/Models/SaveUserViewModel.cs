@@ -1,10 +1,12 @@
-﻿using System.ComponentModel;
+﻿using SV20T1080053.DomainModels;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace SV20T1080053.Areas.Admin.Models
 {
     public class SaveUserViewModel
     {
+
         public int UserId { get; set; }
 
         [DisplayName("Họ và tên")]

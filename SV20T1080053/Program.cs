@@ -28,6 +28,8 @@ builder.Services.AddTransient<IMotorcycleRepository, MotorcycleRepository>();
 builder.Services.AddScoped<ILogger<BrandService>, Logger<BrandService>>();
 builder.Services.AddTransient<IBrandService, BrandService>();
 builder.Services.AddTransient<IBrandRepository, BrandRepository>();
+
+
 // B? sung các service c?n dùng:
 
 builder.Services.AddHttpContextAccessor();

@@ -52,9 +52,23 @@ namespace SV20T1080053.BusinessLayers.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public Task<Motorcycle> CreateMotorcycleAsync(Motorcycle motorcycle)
+        public async Task<Motorcycle> CreateMotorcycleAsync(Motorcycle motorcycle)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (motorcycle == null)
+                {
+                    throw new ArgumentNullException(nameof(motorcycle), "motorcycle object is null");
+                }
+
+                await _motorcycleRepository.CreateAsync(motorcycle);
+                return motorcycle;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error: {ex.Message}");
+                throw;
+            }
         }
 
         public Task<Motorcycle> UpdateMotorcycleAsync(Motorcycle motorcycle)

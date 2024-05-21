@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using SV20T1080053.DomainModels;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace SV20T1080053.Areas.Admin.Models
@@ -17,7 +18,11 @@ namespace SV20T1080053.Areas.Admin.Models
 
         [DisplayName("Hãng xe")]
         [Required(ErrorMessage = "{0} bắt buộc phải có")]
-        public string? BrandId { get; set; }
+        public int BrandId {  get; set; }
+
+        [DisplayName("Hãng xe")]
+        [Required(ErrorMessage = "{0} bắt buộc phải có")]
+        public IEnumerable<Brand> Brands { get; set; } = new List<Brand>();
 
         [DisplayName("Ngày sản xuất")]
         [Required(ErrorMessage = "{0} bắt buộc phải có")]
@@ -25,7 +30,7 @@ namespace SV20T1080053.Areas.Admin.Models
 
         [DisplayName("Loại xe")]
         [Required(ErrorMessage = "{0} bắt buộc phải có")]
-        public string? Type { get; set; }
+        public SV20T1080053.DomainModels.Type? Type { get; set; }
 
         [DisplayName("Màu")]
         [Required(ErrorMessage = "{0} bắt buộc phải có")]
@@ -37,7 +42,7 @@ namespace SV20T1080053.Areas.Admin.Models
 
         [DisplayName("Trạng thái")]
         [Required(ErrorMessage = "{0} bắt buộc phải có")]
-        public string? Status { get; set; }
+        public SV20T1080053.DomainModels.StatusName? StatusName { get; set; }
 
         [DisplayName("Mô tả")]
         [Required(ErrorMessage = "{0} bắt buộc phải có")]
