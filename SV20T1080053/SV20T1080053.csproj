@@ -6125,8 +6125,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\Motorcycles\" />
-    <Folder Include="wwwroot\img\Users\" />
+    <Folder Include="wwwroot\Images\Users\" />
   </ItemGroup>
 
 </Project>

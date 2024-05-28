@@ -16,5 +16,15 @@ namespace SV20T1080053.DataLayers.Repositories.Implementions
         {
             _context = context;
         }
+
+        public Task<Order> GetOrderAllAsync(Order order)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Order> GetByIdAsync(int id)
+        {
+            return await _context.Orders.FindAsync(id);
+        }
     }
 }

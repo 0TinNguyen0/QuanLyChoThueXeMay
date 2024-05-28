@@ -10,10 +10,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header justify-content-center">
-                <h2 class="modal-title text-danger w-100 text-center" id="confirmDeleteModalLabel">Xác nhận xóa</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+                <h2 class="modal-title text-danger w-100 text-center" id="confirmDeleteModalLabel">Xác nhận xóa</h2>
             </div>
             <div class="modal-body text-center">
                 <h4>Bạn có chắc chắn muốn xóa khách hàng này không?</h4>
@@ -26,59 +26,58 @@
     </div>
 </div>
 
-<div class="container-fluid">
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a style="padding:10px; font-size: 14px; font-weight: 200;" href="~/Admin/Customer/Create" class="btn btn-primary btn-sm  navbar-btn">
-                <i class="fa fa-plus"></i> Thêm khách hàng
-            </a>
-        </li>
-    </ul>
-</div>
+<div style="background-color: white; border-radius: 10px; padding: 20px;">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a style="padding:10px; font-size: 14px; font-weight: 200;" href="~/Admin/Customer/Create" class="btn btn-primary btn-sm  navbar-btn">
+                    <i class="fa fa-plus"></i> Thêm khách hàng
+                </a>
+            </li>
+        </ul>
+    </div>
 
-<div class="table-responsive">
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr class="bg-primary">
-                <th style="width:5%" >STT</th>
-                <th style="width:20%">Họ Tên</th>
-                <th>Ngày Sinh</th>
-                <th>Địa chỉ</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Vai trò</th>
-                <th class="text-left">Chức Năng</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var customer in Model.Where(u => u.Role == SV20T1080053.DomainModels.Roles.Customer))
-            {
-                <tr id="user-@customer.UserId">
-                    <td>@(Model.Where(u => u.Role == SV20T1080053.DomainModels.Roles.Customer).ToList().IndexOf(customer) + 1)</td>
-                    <td>@customer.FullName</td>
-                    <td>@string.Format("{0:dd/MM/yyyy}", customer.BirthDate)</td>
-                    <td>@customer.Address</td>
-                    <td>@customer.Phone</td>
-                    <td>@customer.Email</td>
-                    <td>@customer.GetRoleName()</td>
-                    <td class="text-left">
-                        <a href="~/Admin/Customer/Info/@customer.UserId" class="btn btn-xs btn-info" title="Thông tin">
-                            <i class="fa fa-plus-square"></i>
-                        </a>
-                        <a href="~/Admin/Customer/Edit/@customer.UserId" class="btn btn-xs btn-info" title="Chỉnh sửa">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <a href="~/Admin/Customer/ChangePassword?id=@customer.UserId" class="btn btn-xs btn-warning" title="Đổi Mật Khẩu">
-                            <i class="fa fa-key"></i>
-                        </a>
-                        <button class="btn btn-xs btn-danger btn-delete" data-id="@customer.UserId" title="Xóa">
-                            <i class="fa fa-remove"></i>
-                        </button>
-                    </td>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr class="bg-primary">
+                    <th class="text-center" style="width:5%">STT</th>
+                    <th class="text-center" style="width:20%">Họ Tên</th>
+                    <th class="text-center">Ngày Sinh</th>
+                    <th class="text-center">Địa chỉ</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">Phone</th>
+                    <th class="text-center">Vai trò</th>
+                    <th class="text-center">Chức Năng</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var customer in Model.Where(u => u.Role == SV20T1080053.DomainModels.Roles.Customer))
+                {
+                    <tr class="text-center" id="user-@customer.UserId">
+                        <td>@(Model.Where(u => u.Role == SV20T1080053.DomainModels.Roles.Customer).ToList().IndexOf(customer) + 1)</td>
+                        <td>@customer.FullName</td>
+                        <td>@string.Format("{0:dd/MM/yyyy}", customer.BirthDate)</td>
+                        <td>@customer.Address</td>
+                        <td>@customer.Phone</td>
+                        <td>@customer.Email</td>
+                        <td>@customer.GetRoleName()</td>
+                        <td>
+                            <a href="~/Admin/Customer/Edit/@customer.UserId" class="btn btn-xs btn-info" title="Chỉnh sửa">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="~/Admin/Customer/ChangePassword?id=@customer.UserId" class="btn btn-xs btn-warning" title="Đổi Mật Khẩu">
+                                <i class="fa fa-key"></i>
+                            </a>
+                            <button class="btn btn-xs btn-danger btn-delete" data-id="@customer.UserId" title="Xóa">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 @section Scripts {

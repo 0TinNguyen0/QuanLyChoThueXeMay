@@ -10,10 +10,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header justify-content-center">
-                <h2 class="modal-title text-danger w-100 text-center" id="confirmDeleteModalLabel">Xác nhận xóa</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+                <h2 class="modal-title text-danger w-100 text-center" id="confirmDeleteModalLabel">Xác nhận xóa</h2>
             </div>
             <div class="modal-body text-center">
                 <h4>Bạn có chắc chắn muốn xóa hãng xe này không?</h4>
@@ -26,43 +26,45 @@
     </div>
 </div>
 
-<div class="container-fluid">
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a style="padding:10px; font-size: 14px; font-weight: 200; " href="~/Admin/Brand/Create" class="btn btn-primary btn-sm  navbar-btn">
-                <i class="fa fa-plus"></i> Thêm hãng xe
-            </a>
-        </li>
-    </ul>
-</div>
+<div style="background-color: white; border-radius: 10px; padding: 20px;">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a style="padding:10px; font-size: 14px; font-weight: 200; " href="~/Admin/Brand/Create" class="btn btn-primary btn-sm  navbar-btn">
+                    <i class="fa fa-plus"></i> Thêm hãng xe
+                </a>
+            </li>
+        </ul>
+    </div>
 
-<div class="table-responsive">
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr class="bg-primary">
-                <th>STT</th>
-                <th>Hãng xe</th>
-                <th class="text-center">Chức Năng</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var brand in Model)
-            {
-                <tr id="brand-@brand.BrandId">
-                    <td>@(Model.IndexOf(brand) + 1)</td>
-                    <td>@brand.BrandName</td>
-                    <td class="text-center" width="10%">
-                        <a href="~/Admin/Brand/Edit/@brand.BrandId" class="btn btn-xs btn-info" title="Chỉnh sửa">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <button class="btn btn-xs btn-danger btn-delete" data-id="@brand.BrandId" title="Xóa">
-                            <i class="fa fa-remove"></i>
-                        </button>
-                    </td>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr class="bg-primary">
+                    <th class="text-center">STT</th>
+                    <th class="text-center">Hãng xe</th>
+                    <th class="text-center">Chức Năng</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var brand in Model)
+                {
+                    <tr class="text-center" id="brand-@brand.BrandId">
+                        <td>@(Model.IndexOf(brand) + 1)</td>
+                        <td>@brand.BrandName</td>
+                        <td width="10%">
+                            <a href="~/Admin/Brand/Edit/@brand.BrandId" class="btn btn-xs btn-info" title="Chỉnh sửa">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <button class="btn btn-xs btn-danger btn-delete" data-id="@brand.BrandId" title="Xóa">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 @section Scripts {
@@ -86,6 +88,7 @@
                         if (result.success) {
                             row.remove();
                             $('#confirmDeleteModal').modal('hide');
+                            location.reload(); // Load lại trang sau khi xóa thành công
                         } else {
                             alert(result.message);
                         }

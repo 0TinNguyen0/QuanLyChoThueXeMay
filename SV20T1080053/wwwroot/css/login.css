@@ -1,13 +1,13 @@
-﻿body{
+﻿body {
     /* padding-top:4.2rem;
     padding-bottom:4.2rem;
    background:rgba(0, 0, 0, 0.76); */
-   margin: 0;
-   padding: 0;
-    background-image: url('/img/img_body_1.jpg');
+    margin: 0;
+    padding: 0;
+    background-image: url('/Images/img_login.jpg');
     background-size: cover;
     background-attachment: fixed;
-   }
+}
     a{
      text-decoration:none !important;
      }

@@ -10,10 +10,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header justify-content-center">
-                <h2 class="modal-title text-danger w-100 text-center" id="confirmDeleteModalLabel">Xác nhận xóa</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+                <h2 class="modal-title text-danger w-100 text-center" id="confirmDeleteModalLabel">Xác nhận xóa</h2>
             </div>
             <div class="modal-body text-center">
                 <h4>Bạn có chắc chắn muốn xóa nhân viên này không?</h4>
@@ -25,60 +25,58 @@
         </div>
     </div>
 </div>
+<div style="background-color: white; border-radius: 10px; padding: 20px;">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a style="padding:10px; font-size: 14px; font-weight: 200;" href="~/Admin/Employee/Create" class="btn btn-primary btn-sm  navbar-btn">
+                    <i class="fa fa-plus"></i> Thêm nhân viên
+                </a>
+            </li>
+        </ul>
+    </div>
 
-<div class="container-fluid">
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a style="padding:10px; font-size: 14px; font-weight: 200;" href="~/Admin/Employee/Create" class="btn btn-primary btn-sm  navbar-btn">
-                <i class="fa fa-plus"></i> Thêm nhân viên
-            </a>
-        </li>
-    </ul>
-</div>
-
-<div class="table-responsive">
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr class="bg-primary">
-                <th>STT</th>
-                <th>Họ Tên</th>
-                <th>Ngày Sinh</th>
-                <th>Địa chỉ</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Vai trò</th>
-                <th class="text-right">Chức Năng</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var employee in Model.Where(u => u.Role == SV20T1080053.DomainModels.Roles.Employee))
-            {
-                <tr id="user-@employee.UserId">
-                    <td>@(Model.Where(u => u.Role == SV20T1080053.DomainModels.Roles.Employee).ToList().IndexOf(employee) + 1)</td>
-                    <td>@employee.FullName</td>
-                    <td>@string.Format("{0:dd/MM/yyyy}", employee.BirthDate)</td>
-                    <td>@employee.Address</td>
-                    <td>@employee.Email</td>
-                    <td>@employee.Phone</td>
-                    <td>@employee.GetRoleName()</td>
-                    <td class="text-right">
-                        <a href="~/Admin/Customer/Info/@employee.UserId" class="btn btn-xs btn-info" title="Thông tin">
-                            <i class="fa fa-plus-square"></i>
-                        </a>
-                        <a href="~/Admin/Customer/Edit/@employee.UserId" class="btn btn-xs btn-info" title="Chỉnh sửa">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <a href="~/Admin/Customer/ChangePassword?id=@employee.UserId" class="btn btn-xs btn-warning" title="Đổi Mật Khẩu">
-                            <i class="fa fa-key"></i>
-                        </a>
-                        <button class="btn btn-xs btn-danger btn-delete" data-id="@employee.UserId" title="Xóa">
-                            <i class="fa fa-remove"></i>
-                        </button>
-                    </td>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr class="bg-primary">
+                    <th>STT</th>
+                    <th>Họ Tên</th>
+                    <th>Ngày Sinh</th>
+                    <th>Địa chỉ</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Vai trò</th>
+                    <th class="text-right">Chức Năng</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var employee in Model.Where(u => u.Role == SV20T1080053.DomainModels.Roles.Employee))
+                {
+                    <tr id="user-@employee.UserId">
+                        <td>@(Model.Where(u => u.Role == SV20T1080053.DomainModels.Roles.Employee).ToList().IndexOf(employee) + 1)</td>
+                        <td>@employee.FullName</td>
+                        <td>@string.Format("{0:dd/MM/yyyy}", employee.BirthDate)</td>
+                        <td>@employee.Address</td>
+                        <td>@employee.Email</td>
+                        <td>@employee.Phone</td>                   
+                        <td>@employee.GetRoleName()</td>
+                        <td class="text-right">
+                            <a href="~/Admin/Employee/Edit/@employee.UserId" class="btn btn-xs btn-info" title="Chỉnh sửa">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="~/Admin/Employee/ChangePassword?id=@employee.UserId" class="btn btn-xs btn-warning" title="Đổi Mật Khẩu">
+                                <i class="fa fa-key"></i>
+                            </a>
+                            <button class="btn btn-xs btn-danger btn-delete" data-id="@employee.UserId" title="Xóa">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 @section Scripts {
@@ -95,13 +93,14 @@
                 var row = $('#user-' + userIdToDelete);
 
                 $.ajax({
-                    url: '@Url.Action("Delete", "Employee")', // Chuyển hướng yêu cầu đến hành động Delete của CustomerController
+                    url: '@Url.Action("Delete", "Employee")', // Chuyển hướng yêu cầu đến hành động Delete của UserController
                     type: 'POST',
                     data: { id: userIdToDelete }, // Gửi id dưới dạng dữ liệu POST
                     success: function (result) {
                         if (result.success) {
                             row.remove();
                             $('#confirmDeleteModal').modal('hide');
+                            location.reload(); // Load lại trang sau khi xóa thành công
                         } else {
                             alert(result.message);
                         }

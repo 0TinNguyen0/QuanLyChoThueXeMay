@@ -35,5 +35,22 @@
         <input type="password" class="form-control" id="password" name="Password" value="">
         @Html.ValidationMessageFor(m => m.Password, "", new { style = "color: red;" })
     </div>
+    <div class="form-group">
+        <label for="Photo">Ảnh nhân viên:</label>
+        <input type="file" class="form-control" id="Photo" name="Photo" onchange="previewImage(event)">
+        <div id="imagePreview" class="mt-2"></div>
+        @Html.ValidationMessageFor(m => m.Photo, "", new { style = "color: red;" })
+    </div>
     <button type="submit" class="btn btn-primary">Thêm mới</button>
 </form>
+
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var imagePreview = document.getElementById('imagePreview');
+            imagePreview.innerHTML = '<img src="' + reader.result + '" class="img-thumbnail" style="max-width: 200px; max-height: 200px;" />';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>

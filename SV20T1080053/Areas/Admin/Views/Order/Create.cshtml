@@ -1,0 +1,209 @@
+﻿@{
+    ViewBag.Title = "Tạo đơn thuê";
+}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .motorcycle-img {
+        width: 100px;
+        height: 60px;
+    }
+
+    .added-motorcycle-img {
+        width: 50px;
+        height: 30px;
+    }
+
+    .pagination {
+        margin: 20px 0;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Danh sách xe máy</h2>
+            <div id="motorcycleList">
+                <!-- Danh sách xe máy sẽ được tạo động ở đây -->
+            </div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination" id="pagination">
+                    <!-- Nút chuyển trang sẽ được tạo động ở đây -->
+                </ul>
+            </nav>
+        </div>
+        <div class="col-md-6">
+            <div class="rounded bg-white p-3">        
+                <div class="text-center">
+                    <h2>Danh sách xe đã thêm</h2>
+                    <ul id="addedMotorcyclesList" class="list-group">
+                        <!-- Danh sách xe đã thêm sẽ hiển thị ở đây -->
+                    </ul>
+                    <h3>Tổng tiền: <span id="totalPrice">0</span> VND/ngày</h3>             
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <h2 style="font-size:20px">Khách hàng</h2>
+                        <select class="form-select">
+                            <option selected >Chọn khách hàng</option>
+                            <option value="1">Khách hàng 1</option>
+                            <option value="2">Khách hàng 2</option>
+                            <!-- Thêm các tùy chọn khách hàng khác tại đây -->
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <h2 style="font-size:20px">Nhân viên phụ trách</h2>
+                        <select class="form-select">
+                            <option selected >Chọn nhân viên phụ trách</option>
+                            <option value="1">Nhân viên 1</option>
+                            <option value="2">Nhân viên 2</option>
+                            <!-- Thêm các tùy chọn nhân viên khác tại đây -->
+                        </select>
+                    </div>
+                </div>
+                <button style="margin-top:30px; margin-left:400px" class="btn btn-success" onclick="createOrder()">Tạo đơn</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const motorcycles = [
+        { name: 'GRANDE', price: 100000, imageUrl: '/Images/Motorcycles/5c3cc648-3626-4270-983c-6c83e6f829ed.png' },
+        { name: 'FREEGO', price: 120000, imageUrl: '/Images/Motorcycles/4f5536e1-06c2-47ee-9d84-d2f4d795945b.png' },
+        { name: 'GRANDE', price: 200000, imageUrl: '/Images/Motorcycles/741f83a5-695a-4ed1-96b0-793724652693.png' },
+        { name: 'FREEGO', price: 120000, imageUrl: '/Images/Motorcycles/4f5536e1-06c2-47ee-9d84-d2f4d795945b.png' },
+        // Thêm nhiều xe máy khác tại đây
+    ];
+
+    const itemsPerPage = 2;
+    let currentPage = 1;
+
+    let motorcycleCount = 0;
+    let totalPrice = 0;
+
+    function displayMotorcycles(page) {
+        const motorcycleList = document.getElementById('motorcycleList');
+        motorcycleList.innerHTML = '';
+
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const paginatedItems = motorcycles.slice(start, end);
+
+        paginatedItems.forEach(motorcycle => {
+            const motorcycleItem = document.createElement('div');
+            motorcycleItem.className = 'panel panel-default';
+            motorcycleItem.innerHTML = `
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <img src="${motorcycle.imageUrl}" class="motorcycle-img" alt="${motorcycle.name}">
+                            </div>
+                            <div class="col-xs-6">
+                                <h4>${motorcycle.name}</h4>
+                                <p>Giá thuê: ${motorcycle.price.toLocaleString()} VND/ngày</p>
+                            </div>
+                            <div class="col-xs-2">
+                                <button class="btn btn-primary" onclick="addMotorcycle('${motorcycle.name}', ${motorcycle.price}, '${motorcycle.imageUrl}')">Thêm</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            motorcycleList.appendChild(motorcycleItem);
+        });
+
+        updatePagination(page);
+    }
+
+    function updatePagination(page) {
+        const pagination = document.getElementById('pagination');
+        pagination.innerHTML = '';
+
+        const totalPages = Math.ceil(motorcycles.length / itemsPerPage);
+
+        for (let i = 1; i <= totalPages; i++) {
+            const pageItem = document.createElement('li');
+            pageItem.className = i === page ? 'active' : '';
+            pageItem.innerHTML = `<a href="#" onclick="displayMotorcycles(${i})">${i}</a>`;
+            pagination.appendChild(pageItem);
+        }
+    }
+
+    function addMotorcycle(name, price, imageUrl) {
+        motorcycleCount++;
+        totalPrice += price;
+        updateTotalPrice();
+
+        const motorcycleList = document.getElementById('addedMotorcyclesList');
+        const motorcycleItem = document.createElement('li');
+        motorcycleItem.className = 'list-group-item';
+        motorcycleItem.innerHTML = `
+                    <div class="row">
+                        <div class="col-xs-1">${motorcycleCount}</div>
+                        <div class="col-xs-2">
+                            <img src="${imageUrl}" class="added-motorcycle-img" alt="${name}">
+                        </div>
+                        <div class="col-xs-5">${name}</div>
+                        <div class="col-xs-2">${price.toLocaleString()} VND/ngày</div>
+                        <div class="col-xs-2">
+                            <button class="btn btn-danger btn-xs" onclick="removeMotorcycle(this, ${price})">Xóa</button>
+                        </div>
+                    </div>
+                `;
+        motorcycleList.appendChild(motorcycleItem);
+    }
+
+    function removeMotorcycle(button, price) {
+        const item = button.parentElement.parentElement.parentElement;
+        item.parentElement.removeChild(item);
+
+        motorcycleCount--;
+        totalPrice -= price;
+        updateTotalPrice();
+
+        // Cập nhật lại STT sau khi xóa
+        const items = document.querySelectorAll('#addedMotorcyclesList .list-group-item');
+        items.forEach((item, index) => {
+            item.querySelector('.col-xs-1').innerText = index + 1;
+        });
+    }
+
+    function updateTotalPrice() {
+        document.getElementById('totalPrice').innerText = totalPrice.toLocaleString();
+    }
+
+    function createOrder() {
+        const orderDetails = [];
+        const items = document.querySelectorAll('#addedMotorcyclesList .list-group-item');
+        items.forEach((item, index) => {
+            const name = item.querySelector('.col-xs-5').innerText;
+            const priceText = item.querySelector('.col-xs-2').innerText.replace(' VND/ngày', '').replace(/,/g, '');
+            const price = parseInt(priceText, 10);
+            orderDetails.push({ name, price });
+        });
+
+        // Tạo đối tượng đơn hàng
+        const order = {
+            total: totalPrice,
+            details: orderDetails
+        };
+
+        // Xử lý đơn hàng (ví dụ: gửi tới server)
+        console.log('Tạo đơn hàng:', order);
+        alert('Đơn hàng đã được tạo thành công!');
+
+        // Reset danh sách sau khi tạo đơn
+        document.getElementById('addedMotorcyclesList').innerHTML = '';
+        motorcycleCount = 0;
+        totalPrice = 0;
+        updateTotalPrice();
+    }
+
+    // Hiển thị trang đầu tiên khi tải trang
+    displayMotorcycles(currentPage);
+</script>
+
+<!-- Liên kết đến JavaScript của Bootstrap và jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

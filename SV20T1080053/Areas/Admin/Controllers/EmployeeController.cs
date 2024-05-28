@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SV20T1080053.Areas.Admin.Models;
 using SV20T1080053.BusinessLayers.Services.Interfaces;
 using SV20T1080053.DomainModels;
@@ -54,13 +55,33 @@ namespace SV20T1080053.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Save(SaveUserViewModel viewModel)
+        public async Task<IActionResult> Save(SaveUserViewModel viewModel, IFormFile Photo)
         {
             // kiểm tra điều kiện
             if (!ModelState.IsValid)
             {
                 return View("Create", viewModel);
             }
+
+            if (Photo != null && Photo.Length > 0)
+            {
+                // Tạo tên file ngẫu nhiên và lưu tệp lên server
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(Photo.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Users", fileName);
+
+                // Tạo thư mục nếu chưa tồn tại
+                Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+
+                // Lưu tệp lên server
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await Photo.CopyToAsync(stream);
+                }
+
+                // Lưu đường dẫn tệp vào model
+                viewModel.Photo = fileName;
+            }
+
 
             // thêm nếu như userId = 0
             if (viewModel.UserId == 0)
@@ -74,6 +95,7 @@ namespace SV20T1080053.Areas.Admin.Controllers
                     Email = viewModel.Email!,
                     PasswordHash = viewModel.Password!,
                     Phone = viewModel.Phone!,
+                    Photo = viewModel.Photo,
                     Role = Roles.Employee,
                 });
 
@@ -84,6 +106,7 @@ namespace SV20T1080053.Areas.Admin.Controllers
                 }
 
                 return RedirectToAction("Index");
+
             }
 
             return View();
@@ -132,6 +155,9 @@ namespace SV20T1080053.Areas.Admin.Controllers
         //        return StatusCode(500, "Internal server error");
         //    }
         //}
+
+
+
 
     }
 }

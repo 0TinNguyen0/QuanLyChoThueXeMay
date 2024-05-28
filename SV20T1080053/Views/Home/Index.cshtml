@@ -1,32 +1,119 @@
-﻿@{
+﻿@using SV20T1080053.DomainModels;
+@model List<SV20T1080053.DomainModels.Motorcycle>
+
+@{
     ViewData["Title"] = "Trang Chủ";
 }
 
-<div style="margin-top:100px" class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">Welcome</h1>
+
+
+<style>
+    body {
+        overflow-x: hidden;
+    }
+
+    .full-width {
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        padding: 0;
+    }
+</style>
+
+<div class="hero-section d-flex justify-content-center align-items-center text-center full-width" style="background-image: url('https://i.pinimg.com/originals/8f/49/d5/8f49d527b48e18550a9d667857425411.jpg'); background-size: cover; height: 600px;">
+    <div class="container text-white" style="background-color: rgba(0, 0, 0, 0.5); padding: 20px;">
+        <p class="display-4 fw-bold">Dịch vụ thuê xe máy</p>
+        <p class="lead mb-0">
+            Chúng tôi hiểu cảm giác của người đi thuê xe máy phải bỏ ra một
+            số tiền để có được một chiếc xe đủ tốt, không gặp rắc rối khi đi trên đường. Tuy nhiên thật khó để tìm được một đơn
+            vị cung cấp dịch vụ cho thuê xe uy tín, chất lượng hiện nay. Chúng tôi tiên phong trở thành đơn vị số 1 về cung cấp dịch
+            vụ thuê xe máy tự lái tại Việt Nam.
+        </p>
+    </div>
 </div>
+
+<div class="text-center mb-5" style="margin-top:50px">
+    <h2 class="display-5 fw-bold">
+        Ưu thế tại Motorcycle Rentalt </h2>
+    <div style="display: flex; justify-content: center; margin-top: 20px;">
+        <hr style="width: 200px; border: 2px solid black;">
+    </div>
+    <div style="margin-top: 40px; font-size: 20px; display: flex; justify-content: center; align-items: center; gap: 40px;">
+        <div style="text-align: center;">
+            <i class="fas fa-thumbs-up" style="color: #007bff; font-size: 80px;"></i>
+            <div style="margin-top: 10px;">
+                <strong><span>Được khách hàng tin tưởng</span></strong>
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <i class="fas fa-star" style="color: #FFD700; font-size: 80px;"></i>
+            <div style="margin-top: 10px;">
+                <strong><span>Uy tín làm nên thương hiệu</span></strong>
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <i class="fas fa-hands-helping" style="color: #28a745; font-size: 80px;"></i>
+            <div style="margin-top: 10px;">
+                <strong><span>Phục vụ chu đáo nhiệt tình</span></strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top:90px">
+    <div class="container-fluid bg-dark py-5 full-width">
+        <div class="container px-lg-5 my-5">
+            <div class="d-flex justify-content-between align-items-center text-white">
+                <h2 class="display-4 fw-bolder" style="font-size:30px">Cùng Motorcycle Rentail trải nghiệm ngay bạn nhé!</h2>
+                <button class="btn btn-primary btn-lg">
+                    <i class="fas fa-phone-alt"></i> 0375.551.042
+                </button>
+            </div>
+            <p class="text-white mb-0" style="font-size: 15px;">Với mức giá vô cùng hợp lý, cùng nhân viên chăm sóc tận tình trong suốt hành trình của Bạn</p>
+        </div>
+    </div>
+<!-- Section-->
+<section class="py-5">
+<div class="text-center mb-5">
+     <h2 class="display-5 fw-bold">Danh mục xe máy</h2>
+     <img src="~/Images/Motorcycles/logo.png" alt="Logo xe máy" style="width: 150px; height: auto; margin-top: 10px;">
+         <img src="~/Images/Motorcycles/logo2.png" alt="Logo xe máy" style="width: 200px; height: auto; margin-top: 10px;">
+            <div style="display: flex; justify-content: center; margin-top: 20px;">
+                <hr style="width: 200px; border: 2px solid black;">
+            </div>
+</div>
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                @foreach (var motorcycle in Model)
+                {
+                    <div class="col mb-5">
+                        <div class="card h-100 text-center">
+                            <!-- Product image-->
+                            <h5 class="fw-bolder">Tên xe: @motorcycle.MotorcycleName</h5>
+                            <h6 class="fw-bolder">@motorcycle.Description</h6>
+                            <img src="~/Images/Motorcycles/@motorcycle.Photo" alt="Ảnh xe máy" style="width: 15rem; height: 14rem;" />
+                            <div class="card-body p-4">
+                                <div class="text-center">     
+                                    <h6 class="fw-bolder">Hãng: @motorcycle.Brand?.BrandName</h6>
+                                    <h6 class="fw-bolder">Màu: @motorcycle.Color</h6>
+                                    <h6 class="fw-bolder">Loại xe: @motorcycle.GetTypeName()</h6>
+                                    <h6 class="fw-bolder">Tình trạng: @motorcycle.GetStatusName()</h6>
+                                    <h6 class="fw-bolder" style="color:red; font-size:15px">Giá: @motorcycle.Amount.ToString("N0") VNĐ/Ngày</h6>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Thêm vào giỏ hàng</a></div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+</section>
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

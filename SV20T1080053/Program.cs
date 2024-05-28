@@ -29,7 +29,9 @@ builder.Services.AddScoped<ILogger<BrandService>, Logger<BrandService>>();
 builder.Services.AddTransient<IBrandService, BrandService>();
 builder.Services.AddTransient<IBrandRepository, BrandRepository>();
 
-
+builder.Services.AddScoped<ILogger<OrderService>, Logger<OrderService>>();
+builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 // B? sung các service c?n dùng:
 
 builder.Services.AddHttpContextAccessor();

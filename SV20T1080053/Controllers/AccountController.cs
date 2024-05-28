@@ -95,5 +95,10 @@ namespace SV20T1080053.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
     }
 }

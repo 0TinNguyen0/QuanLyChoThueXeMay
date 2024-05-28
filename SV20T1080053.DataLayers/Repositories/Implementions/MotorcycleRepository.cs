@@ -35,8 +35,6 @@ namespace SV20T1080053.DataLayers.Repositories.Implementions
         public async Task<Motorcycle> GetByIdAsync(int id)
         {
             return await _context.Motorcycles.FindAsync(id);
-
-
         }
     }
 }

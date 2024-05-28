@@ -9,7 +9,7 @@ namespace SV20T1080053.Areas.Admin.Models
         public int MotorcycleId { get; set; }
 
         [DisplayName("Ảnh xe")]
-        [Required(ErrorMessage = "{0} bắt buộc phải có")]
+        //[Required(ErrorMessage = "{0} bắt buộc phải có")]
         public string? Photo { get; set; }
 
         [DisplayName("Tên xe")]

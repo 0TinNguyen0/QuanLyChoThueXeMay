@@ -3,7 +3,7 @@
     ViewBag.Title = "Thêm xe máy";
 }
 
-<form action="~/Admin/Motorcycle/Save" method="post">
+<form action="~/Admin/Motorcycle/Save" method="post" enctype="multipart/form-data">
     <input type="hidden" name="MotorcycleId" value="@Model.MotorcycleId" />
     <div class="form-group">
         <label for="MotocycleName">Tên xe:</label>
@@ -22,7 +22,11 @@
     </div>
     <div class="form-group">
         <label for="Type">Loại xe:</label>
-        @Html.DropDownListFor(m => m.Type, new SelectList(Enum.GetValues(typeof(SV20T1080053.DomainModels.Type))), "Chọn loại xe", new { @class = "form-control" })
+        <select class="form-control" id="Type" name="Type">
+            <option value="">Chọn loại xe</option>
+            <option value="Manual" @(Model.Type == SV20T1080053.DomainModels.Type.Manual ? "selected" : "")>Xe số</option>
+            <option value="Automatic" @(Model.Type == SV20T1080053.DomainModels.Type.Automatic ? "selected" : "")>Xe tay ga</option>
+        </select>
         @Html.ValidationMessageFor(m => m.Type, "", new { style = "color: red;" })
     </div>
     <div class="form-group">
@@ -37,7 +41,11 @@
     </div>
     <div class="form-group">
         <label for="StatusName">Trạng thái:</label>
-        @Html.DropDownListFor(m => m.StatusName, new SelectList(Enum.GetValues(typeof(SV20T1080053.DomainModels.StatusName))), "Chọn trạng thái", new { @class = "form-control" })
+        <select class="form-control" id="StatusName" name="StatusName">
+            <option value="">Chọn trạng thái</option>
+            <option value="NotRented" @(Model.StatusName == SV20T1080053.DomainModels.StatusName.NotRented ? "selected" : "")>Chưa thuê</option>
+            <option value="Rented" @(Model.StatusName == SV20T1080053.DomainModels.StatusName.Rented ? "selected" : "")>Đang thuê</option>
+        </select>
         @Html.ValidationMessageFor(m => m.StatusName, "", new { style = "color: red;" })
     </div>
     <div class="form-group">
@@ -47,8 +55,20 @@
     </div>
     <div class="form-group">
         <label for="Photo">Ảnh xe:</label>
-        <input type="text" class="form-control" id="Photo" name="Photo" value="@Model.Photo">
+        <input type="file" class="form-control" id="Photo" name="Photo" onchange="previewImage(event)">
+        <div id="imagePreview" class="mt-2"></div>
         @Html.ValidationMessageFor(m => m.Photo, "", new { style = "color: red;" })
     </div>
     <button type="submit" class="btn btn-primary">Thêm mới</button>
 </form>
+
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var imagePreview = document.getElementById('imagePreview');
+            imagePreview.innerHTML = '<img src="' + reader.result + '" class="img-thumbnail" style="max-width: 200px; max-height: 200px;" />';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>

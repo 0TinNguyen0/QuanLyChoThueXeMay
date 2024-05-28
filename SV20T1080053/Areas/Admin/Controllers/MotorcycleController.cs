@@ -50,7 +50,7 @@ namespace SV20T1080053.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save(SaveMotorcycleViewModel model)
+        public async Task<IActionResult> Save(SaveMotorcycleViewModel model, IFormFile Photo)
         {
             if (!ModelState.IsValid)
             {
@@ -61,6 +61,25 @@ namespace SV20T1080053.Areas.Admin.Controllers
 
             try
             {
+                if (Photo != null && Photo.Length > 0)
+                {
+                    // Tạo tên file ngẫu nhiên và lưu tệp lên server
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(Photo.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Motorcycles", fileName);
+
+                    // Tạo thư mục nếu chưa tồn tại
+                    Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+
+                    // Lưu tệp lên server
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await Photo.CopyToAsync(stream);
+                    }
+
+                    // Lưu đường dẫn tệp vào model
+                    model.Photo = fileName;
+                }
+
                 // Map SaveMotorcycleViewModel to Motorcycle domain model
                 var motorcycle = new Motorcycle
                 {
@@ -92,6 +111,26 @@ namespace SV20T1080053.Areas.Admin.Controllers
             {
                 _logger.LogError(ex, $"Error: {ex.Message}");
                 return StatusCode(500, "Internal server error");
+            }
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                var motorcycleToDelete = await _motorcycleService.GetMotorcycleByIdAsync(id);
+                if (motorcycleToDelete == null)
+                {
+                    return NotFound(new { success = false, message = "Botorcycle not found" });
+                }
+
+                await _motorcycleService.DeleteMotorcycleAsync(motorcycleToDelete);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex.Message}");
+                return StatusCode(500, new { success = false, message = "Internal server error" });
             }
         }
     }

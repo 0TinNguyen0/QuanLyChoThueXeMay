@@ -10,10 +10,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header justify-content-center">
-                <h2 class="modal-title text-danger w-100 text-center" id="confirmDeleteModalLabel">Xác nhận xóa</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+                <h2 class="modal-title text-danger w-100 text-center" id="confirmDeleteModalLabel">Xác nhận xóa</h2>
             </div>
             <div class="modal-body text-center">
                 <h4>Bạn có chắc chắn muốn xóa xe máy này không?</h4>
@@ -26,88 +26,88 @@
     </div>
 </div>
 
-<div class="container-fluid">
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a style="padding:10px; font-size: 14px; font-weight: 200;" href="~/Admin/Motorcycle/Create" class="btn btn-primary btn-sm  navbar-btn">
-                <i class="fa fa-plus"></i> Thêm xe máy
-            </a>
-        </li>
-    </ul>
-</div>
+<div style="background-color: white; border-radius: 10px; padding: 20px;">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a style="padding:10px; font-size: 14px; font-weight: 200;" href="~/Admin/Motorcycle/Create" class="btn btn-primary btn-sm  navbar-btn">
+                    <i class="fa fa-plus"></i> Thêm xe máy
+                </a>
+            </li>
+        </ul>
+    </div>
 
-<div class="table-responsive">
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr class="bg-primary">
-                <th>STT</th>
-                <th>Ảnh xe</th>
-                <th>Tên xe</th>
-                <th>Hãng xe</th>
-                <th>Loại xe</th>
-                <th>Năm sản xuất</th>
-                <th>Màu</th>
-                <th>Giá Thuê</th>
-                <th>Trạng Thái</th>
-                <th class="text-right">Chức Năng</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var motorcycle in Model)
-            {
-                <tr id="motorcycle-@motorcycle.MotorcycleId">
-                    <td>@(Model.IndexOf(motorcycle) + 1)</td>
-                    <td>
-                        <img src="@motorcycle.Photo" alt="Ảnh xe máy" class="img-thumbnail" style="width: 100px; height: auto;" />
-                    </td>
-                    <td>@motorcycle.MotorcycleName</td>
-                    <td>@motorcycle.Brand?.BrandName</td>
-                    <td>@motorcycle.GetTypeName()</td>
-                    <td>@string.Format("{0:dd/MM/yyyy}", motorcycle.ReleaseYear)</td>
-                    <td>@motorcycle.Color</td>
-                    <td>@motorcycle.Amount</td>
-                    <td>@motorcycle.GetStatusName()</td>
-                    <td class="text-right">
-                        <a href="~/Admin/Customer/Info/@motorcycle.MotorcycleId" class="btn btn-xs btn-info" title="Thông tin">
-                            <i class="fa fa-plus-square"></i>
-                        </a>
-                        <a href="~/Admin/Customer/Edit/@motorcycle.MotorcycleId" class="btn btn-xs btn-info" title="Chỉnh sửa">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <a href="~/Admin/Customer/ChangePassword?id=@motorcycle.MotorcycleId" class="btn btn-xs btn-warning" title="Đổi Mật Khẩu">
-                            <i class="fa fa-key"></i>
-                        </a>
-                        <button class="btn btn-xs btn-danger btn-delete" data-id="@motorcycle.MotorcycleId" title="Xóa">
-                            <i class="fa fa-remove"></i>
-                        </button>
-                    </td>
+    <div class="table-responsive">
+        <table class="table ">
+            <thead>
+                <tr class="text-center bg-primary">
+                    <th class="text-center">STT</th>
+                    <th class="text-center">Ảnh xe</th>
+                    <th class="text-center">Tên xe</th>
+                    <th class="text-center">Hãng xe</th>
+                    <th class="text-center">Loại xe</th>
+                    <th class="text-center">Năm sản xuất</th>
+                    <th class="text-center">Màu</th>
+                    <th class="text-center">Giá Thuê</th>
+                    <th class="text-center">Trạng Thái</th>
+                    <th class="text-center">Chức Năng</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var motorcycle in Model)
+                {
+                    <tr class="text-center" id="motorcycle-@motorcycle.MotorcycleId">
+                        <td>@(Model.IndexOf(motorcycle) + 1)</td>
+                        <td>
+                            <img src="~/Images/Motorcycles/@motorcycle.Photo" alt="Ảnh xe máy" class="img-thumbnail" style="width: 100px; height: auto;" />
+                        </td>
+                        <td>@motorcycle.MotorcycleName</td>
+                        <td>@motorcycle.Brand?.BrandName</td>
+                        <td>@motorcycle.GetTypeName()</td>
+                        <td>@string.Format("{0:dd/MM/yyyy}", motorcycle.ReleaseYear)</td>
+                        <td>@motorcycle.Color</td>
+                        <td>@motorcycle.Amount.ToString("N0") VNĐ/Ngày</td>
+                        <td>@motorcycle.GetStatusName()</td>
+                        <td>
+                            <a href="~/Admin/Motorcycle/Info/@motorcycle.MotorcycleId" class="btn btn-xs btn-info" title="Thông tin">
+                                <i class="fa fa-plus-square"></i>
+                            </a>
+                            <a href="~/Admin/Motorcycle/Edit/@motorcycle.MotorcycleId" class="btn btn-xs btn-info" title="Chỉnh sửa">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <button class="btn btn-xs btn-danger btn-delete" data-id="@motorcycle.MotorcycleId" title="Xóa">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
-            var userIdToDelete;
+            var motorcycleIdToDelete;
             $('.btn-delete').click(function (event) {
                 event.preventDefault();
-                userIdToDelete = $(this).data('id');
+                motorcycleIdToDelete = $(this).data('id');
                 $('#confirmDeleteModal').modal('show');
             });
 
             $('#confirmDeleteButton').click(function () {
-                var row = $('#user-' + userIdToDelete);
+                var row = $('#motorcycle-' + motorcycleIdToDelete);
 
                 $.ajax({
-                    url: '@Url.Action("Delete", "customer")', // Chuyển hướng yêu cầu đến hành động Delete của CustomerController
+                    url: '@Url.Action("Delete", "Motorcycle")', // Chuyển hướng yêu cầu đến hành động Delete của MotorcycleController
                     type: 'POST',
-                    data: { id: userIdToDelete }, // Gửi id dưới dạng dữ liệu POST
+                    data: { id: motorcycleIdToDelete }, // Gửi id dưới dạng dữ liệu POST
                     success: function (result) {
                         if (result.success) {
                             row.remove();
                             $('#confirmDeleteModal').modal('hide');
+                            location.reload(); // Load lại trang sau khi xóa thành công
                         } else {
                             alert(result.message);
                         }

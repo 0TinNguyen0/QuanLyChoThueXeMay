@@ -9,6 +9,7 @@ namespace SV20T1080053.DataLayers.Repositories.Interfaces
 {
     public interface IOrderRepository : IRepository<Order>
     {
-
+        Task<Order> GetOrderAllAsync(Order order);
+        Task<Order> GetByIdAsync(int id);
     }
 }

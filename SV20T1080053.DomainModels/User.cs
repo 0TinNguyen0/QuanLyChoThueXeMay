@@ -15,7 +15,8 @@ namespace SV20T1080053.DomainModels
     public enum Roles 
     {
         Employee,
-        Customer
+        Customer,
+        Admin,
     }
 
     [Table("Users")]

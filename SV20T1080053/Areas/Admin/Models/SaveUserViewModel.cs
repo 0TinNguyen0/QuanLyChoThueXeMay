@@ -32,5 +32,9 @@ namespace SV20T1080053.Areas.Admin.Models
         [DisplayName("Số điện thoại")]
         [Required(ErrorMessage = "{0} bắt buộc phải có")]
         public string? Phone { get; set; }
+
+        [DisplayName("Ảnh")]
+        //[Required(ErrorMessage = "{0} bắt buộc phải có")]
+        public string? Photo { get; set; }
     }
 }

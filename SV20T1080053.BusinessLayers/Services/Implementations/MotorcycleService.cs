@@ -34,7 +34,7 @@ namespace SV20T1080053.BusinessLayers.Services.Implementations
             try
             {
                 var motorcycles = await _motorcycleRepository.GetAllAsync();
-                if (motorcycles is null || motorcycles.Count == 0)
+                if (motorcycles == null )
                 {
                     throw new Exception("Không có xe nào!");
                 }
@@ -47,9 +47,23 @@ namespace SV20T1080053.BusinessLayers.Services.Implementations
             }
         }
 
-        public Task<Motorcycle> GetMotorcycleByIdAsync(int id)
+        public async Task<Motorcycle> GetMotorcycleByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                var motorcycle = await _motorcycleRepository.GetByIdAsync(id);
+                if (motorcycle == null)
+                {
+                    throw new KeyNotFoundException($"Không tìm thấy xe với ID {id}.");
+                }
+                return motorcycle;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Lỗi xảy ra khi lấy xe theo ID: {ex.Message}");
+                throw;
+            }
         }
 
         public async Task<Motorcycle> CreateMotorcycleAsync(Motorcycle motorcycle)
@@ -76,9 +90,25 @@ namespace SV20T1080053.BusinessLayers.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public Task<Motorcycle> DeleteMotorcycleAsync(Motorcycle motorcycle)
+        public async Task<Motorcycle> DeleteMotorcycleAsync(Motorcycle motorcycle)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (motorcycle == null)
+                {
+                    throw new ArgumentNullException(nameof(motorcycle), "Error");
+                }
+
+                // Xóa  khỏi cơ sở dữ liệu
+                await _motorcycleRepository.DeleteAsync(motorcycle);
+
+                return motorcycle;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Lỗi khi xóa: {ex.Message}");
+                throw;
+            }
         }
     }
 }
